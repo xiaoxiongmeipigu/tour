@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:id="@+id/root_view"
+    >
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="fitXY"
+        fresco:fadeDuration="2000"
+        fresco:placeholderImage="@mipmap/img_default"
+        fresco:placeholderImageScaleType="fitCenter"
+        fresco:progressBarAutoRotateInterval="2000"
+        fresco:progressBarImage="@drawable/progress"
+        fresco:progressBarImageScaleType="centerInside"
+        fresco:actualImageScaleType="centerCrop"
+        android:layout_gravity="center"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="vertical"
+        android:background="#4d000000"
+        android:gravity="center_vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin_10dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="景阳大酒店"
+                android:textSize="@dimen/text_big_xx"
+                android:textColor="@color/shop_white"
+                android:textStyle="bold"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="8.5折"
+                android:textSize="@dimen/text_big_x"
+                android:textColor="@color/shop_white"
+                android:textStyle="bold"
+                android:layout_marginLeft="30dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_1"
+            >
+
+            <TextView
+                android:id="@+id/info"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="满碗佳肴满香店，花苑情谊客满楼"
+                android:textSize="@dimen/text_normal"
+                android:textColor="@color/shop_white"
+                android:textStyle="bold"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2.6 KM"
+                android:textSize="@dimen/text_normal"
+                android:textColor="@color/shop_white"
+                android:textStyle="bold"
+                android:layout_marginLeft="11dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_marginRight="@dimen/margin_10dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

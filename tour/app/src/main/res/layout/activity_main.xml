@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zjhj.tour.activity.MainActivity"
+    >
+
+    <com.zjhj.tour.widget.BestSwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            ></android.support.v7.widget.RecyclerView>
+
+    </com.zjhj.tour.widget.BestSwipeRefreshLayout>
+
+    <RelativeLayout
+        android:id="@+id/lay_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_height_45dp"
+        android:gravity="center"
+        >
+
+        <View
+            android:id="@+id/bg_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/text_height_45dp"
+            android:background="@color/shop_blue"
+            />
+
+        <RelativeLayout
+            android:orientation="vertical" android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            >
+
+            <TextView
+                android:id="@+id/addr_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/margin_2"
+                android:paddingRight="@dimen/margin_2"
+                android:layout_centerVertical="true"
+                android:drawableRight="@mipmap/down_white"
+                android:drawablePadding="@dimen/margin_1"
+                android:text="北京"
+                android:textColor="@color/shop_white"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_big_x"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/logo_name"
+                android:layout_centerInParent="true"
+                />
+
+
+            <ImageView
+                android:id="@+id/person_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/margin_2"
+                android:paddingRight="@dimen/margin_2"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/person"
+                />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
