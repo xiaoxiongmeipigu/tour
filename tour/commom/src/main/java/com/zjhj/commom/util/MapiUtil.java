@@ -113,9 +113,9 @@ public class MapiUtil {
 
         if(null!=userSP.getUserBean()){
             params.put(Constants.Token, TextUtils.isEmpty(userSP.getUserBean().getToken())?"":userSP.getUserBean().getToken());
-            params.put(Constants.Uid, TextUtils.isEmpty(userSP.getUserBean().getUser_id())?"":userSP.getUserBean().getUser_id());
+            params.put(Constants.Uid, TextUtils.isEmpty(userSP.getUserBean().getGuide_id())?"":userSP.getUserBean().getGuide_id());
             DebugLog.i("token=>"+userSP.getUserBean().getToken());
-            DebugLog.i("userSP.getUserBean().getUid()=>"+userSP.getUserBean().getUser_id());
+            DebugLog.i("userSP.getUserBean().getUid()=>"+userSP.getUserBean().getGuide_id());
         }
         if (params != null)
             DebugLog.i("params=" + params.toString());
@@ -127,11 +127,11 @@ public class MapiUtil {
                         DebugLog.i("mapi response" + s);
                         JSONObject jsonObject = JSONObject.parseObject(s.trim());
                         DebugLog.i("jsonObject==>"+(jsonObject==null));
-                        if (null!=jsonObject.getInteger("code")&&jsonObject.getInteger("code")==1) {
+                        if (null!=jsonObject.getInteger("code")&&jsonObject.getInteger("code")==0) {
                             response.success(jsonObject);
                         }
                         Integer code = jsonObject.getInteger("code");
-                        if (null!=code&&code==3) {
+                        if (null!=code&&code==-1) {
                             //打开登录UI
                             if (act == null) {
                                 return;
@@ -142,7 +142,7 @@ public class MapiUtil {
                             act.sendBroadcast(intent);
                             return;
                         }
-                        if (fail != null && code!=1) {
+                        if (fail != null && code!=0) {
                             fail.fail(code, jsonObject.getString("msg"));//参数不满足条件
                         }
                     }
@@ -266,12 +266,12 @@ public class MapiUtil {
                     public void onSuccess(ResponseInfo<String> arg0) {
                         DebugLog.i("mapi response"+arg0.result);
                         JSONObject jsonObject = JSONObject.parseObject(arg0.result);
-                        if (null!=jsonObject.getInteger("code")&&jsonObject.getInteger("code")==1) {
+                        if (null!=jsonObject.getInteger("code")&&jsonObject.getInteger("code")==0) {
                             response.success(jsonObject);
                         }
                         Integer code = jsonObject.getInteger("code");
 
-                        if (null!=code&&code==3) {
+                        if (null!=code&&code==-1) {
                             //打开登录UI
                             if (activity == null) {
                                 return;
@@ -289,7 +289,7 @@ public class MapiUtil {
 //                    activity.sendBroadcast(intent);
 //                    return;
 ////                }
-                        if (fail != null && code!=1) {
+                        if (fail != null && code!=0) {
                             fail.fail(code, jsonObject.getString("msg"));
                         }
                     }

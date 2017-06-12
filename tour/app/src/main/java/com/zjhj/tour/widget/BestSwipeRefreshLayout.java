@@ -30,7 +30,7 @@ public class BestSwipeRefreshLayout extends SwipeRefreshLayout{
     }
 
     private void initView() {
-        setColorSchemeResources(R.color.shop_red);
+        setColorSchemeResources(R.color.shop_blue);
         setProgressBackgroundColorSchemeResource(android.R.color.white);
         setSize(SwipeRefreshLayout.LARGE);
     }

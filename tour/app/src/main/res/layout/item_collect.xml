@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+    android:background="@color/shop_white"
+    android:id="@+id/root_view"
+    >
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/shop_iv"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        fresco:fadeDuration="2000"
+        fresco:placeholderImage="@mipmap/img_default"
+        fresco:placeholderImageScaleType="fitCenter"
+        fresco:progressBarAutoRotateInterval="2000"
+        fresco:progressBarImage="@drawable/progress"
+        fresco:progressBarImageScaleType="centerInside"
+        fresco:actualImageScaleType="centerCrop"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/margin_2"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="@dimen/margin_2"
+        android:layout_marginRight="@dimen/margin_2"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:id="@+id/name_tv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/shop_black"
+                android:textSize="@dimen/text_big_xx"
+                android:textStyle="bold"
+                android:text=""
+                android:maxLines="1"
+                android:ellipsize="end"
+                />
+
+            <TextView
+                android:id="@+id/distance_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#aaaaaa"
+                android:textSize="@dimen/text_normal"
+                android:text=""
+                android:layout_marginLeft="@dimen/margin_1"
+                />
+
+        </LinearLayout>
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="@style/fiveRatingBar"
+            android:numStars="5"
+            android:rating="0"
+            android:stepSize="0.1"
+            android:isIndicator="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2"
+            >
+        </RatingBar>
+
+        <TextView
+            android:id="@+id/feature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/text_normal"
+            android:text=""
+            android:layout_marginTop="@dimen/margin_2"
+            android:maxLines="1"
+            android:ellipsize="end"
+            />
+
+      </LinearLayout>
+
+</LinearLayout>

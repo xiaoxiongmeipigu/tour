@@ -36,8 +36,42 @@ public class SMSUtils {
         eventHandler = hanlder;
     }
 
-    public static void requestCode(Activity activity,String phone){
-        UserApi.getverify(activity, phone, new RequestCallback<JSONObject>() {
+    public static void requestCode(Activity activity,String scene,String phone,String img_code){
+        UserApi.getverify(activity, scene,phone,img_code, new RequestCallback<JSONObject>() {
+            @Override
+            public void success(JSONObject success) {
+                String mark = success.getString("msg");
+                eventHandler.afterEvent(EVENT_GET_VERIFICATION_CODE,
+                        RESULT_COMPLETE,mark);
+            }
+        }, new RequestExceptionCallback() {
+            @Override
+            public void error(Integer code, String message) {
+                eventHandler.afterEvent(EVENT_GET_VERIFICATION_CODE_ERROR,
+                        RESULT_ERROR,message);
+            }
+        });
+    }
+
+    public static void requestBindCode(Activity activity){
+        UserApi.sendunbindcode(activity,new RequestCallback<JSONObject>() {
+            @Override
+            public void success(JSONObject success) {
+                String mark = success.getString("msg");
+                eventHandler.afterEvent(EVENT_GET_VERIFICATION_CODE,
+                        RESULT_COMPLETE,mark);
+            }
+        }, new RequestExceptionCallback() {
+            @Override
+            public void error(Integer code, String message) {
+                eventHandler.afterEvent(EVENT_GET_VERIFICATION_CODE_ERROR,
+                        RESULT_ERROR,message);
+            }
+        });
+    }
+
+    public static void sendbindcode(Activity activity,String mobile,String code){
+        UserApi.sendbindcode(activity,mobile,code,new RequestCallback<JSONObject>() {
             @Override
             public void success(JSONObject success) {
                 String mark = success.getString("msg");

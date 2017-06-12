@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSONObject;
+import com.zjhj.commom.result.MapiCityItemResult;
 import com.zjhj.commom.result.MapiUserResult;
 
 /**
@@ -12,10 +13,11 @@ import com.zjhj.commom.result.MapiUserResult;
 public class UserSP extends AbstractSP {
 
     private final static String KEY_SP_USER = "house.user";
+    private final static String KEY_SP_ADDR = "house.addr";
     private final static String KEY_SP_USER_GUIDE = "house_user_guide";
     private final static String KEY_SP_Resources = "house.resources";
     private final static String KEY_SP_Alias = "house_user_Alias";
-    private final static String KEY_SP_Addr = "user_addr";
+
     public UserSP(Context context) {
         super(context);
     }
@@ -24,12 +26,24 @@ public class UserSP extends AbstractSP {
         sharedPreferences.edit().putString(KEY_SP_USER, JSONObject.toJSONString(userbean)).commit();
     }
 
+    public void saveUserAddr(MapiCityItemResult mapiCityItemResult) {
+        sharedPreferences.edit().putString(KEY_SP_ADDR, JSONObject.toJSONString(mapiCityItemResult)).commit();
+    }
+
     public MapiUserResult getUserBean() {
         String userJsonStr = sharedPreferences.getString(KEY_SP_USER, null);
         if (TextUtils.isEmpty(userJsonStr)) {
             return null;
         }
         return JSONObject.parseObject(userJsonStr, MapiUserResult.class);
+    }
+
+    public MapiCityItemResult getUserAddr() {
+        String userJsonStr = sharedPreferences.getString(KEY_SP_ADDR, null);
+        if (TextUtils.isEmpty(userJsonStr)) {
+            return null;
+        }
+        return JSONObject.parseObject(userJsonStr, MapiCityItemResult.class);
     }
 
     public void saveResource(String json){
@@ -54,16 +68,14 @@ public class UserSP extends AbstractSP {
     }
 
     public boolean checkLogin() {
-        return getUserBean() != null && !TextUtils.isEmpty(getUserBean().getUser_id());
-    }
-
-    public boolean checkVip() {
-        return getUserBean() != null && "1".equals(getUserBean().getIs_vip());
+        return getUserBean() != null && !TextUtils.isEmpty(getUserBean().getGuide_id());
     }
 
     public void clearUserData() {
         sharedPreferences.edit().remove(KEY_SP_USER).commit();
         sharedPreferences.edit().remove(KEY_SP_Alias).commit();
+//        sharedPreferences.edit().remove(KEY_SP_ADDR).commit();
+
     }
 
     /**
@@ -86,15 +98,6 @@ public class UserSP extends AbstractSP {
             return null;
         }
         return code;
-    }
-
-    public void setAddr(String json){
-        sharedPreferences.edit().putString(KEY_SP_Addr, json).commit();
-
-    }
-
-    public String getAddr(){
-        return sharedPreferences.getString(KEY_SP_Addr,"");
     }
 
 }

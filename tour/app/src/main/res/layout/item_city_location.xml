@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="@color/background_gray"
+    android:gravity="center_vertical"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="定位城市"
+        android:textColor="@color/light_black"
+        android:textSize="@dimen/text_big"
+        android:layout_marginLeft="@dimen/margin_2"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="12dp"
+        >
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="100dp"
+            android:layout_height="38dp"
+            android:text=""
+            android:textSize="@dimen/text_normal"
+            android:textColor="@color/shop_black"
+            android:gravity="center"
+            android:background="@drawable/rect_stroke_divider_width_1_round_5"
+            android:layout_marginLeft="@dimen/margin_2"
+            />
+
+        <LinearLayout
+            android:id="@+id/location_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="right|center_vertical"
+            android:paddingRight="@dimen/margin_2"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            >
+
+            <ImageView
+                android:id="@+id/location_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/refresh"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="重新定位"
+                android:textColor="@color/shop_blue"
+                android:textSize="@dimen/text_big"
+                android:layout_marginLeft="12dp"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

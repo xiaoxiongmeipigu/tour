@@ -54,7 +54,15 @@ public class AnimationUtil implements AnimationListener {
 
 	/** 开始动画 */
 	public void startAnimation(View view) {
+		animation.reset();
+		view.clearAnimation();
 		view.startAnimation(animation);
+	}
+
+	/** 结束动画 */
+	public void stopAnimation(View view) {
+		animation.reset();
+		view.clearAnimation();
 	}
 
 	/** 开启一个帧动画 */
@@ -127,5 +135,7 @@ public class AnimationUtil implements AnimationListener {
 			this.animationRepeatListener.onAnimationRepeat(animation);
 		}
 	}
+
+
 
 }

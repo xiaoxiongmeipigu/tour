@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zjhj.tour.activity.shop.ShopListActivity"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="@dimen/text_height_45dp"
+        android:id="@+id/lay_header"
+        android:background="@color/shop_white"
+        android:gravity="center_vertical"
+        >
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/margin_2"
+            android:paddingRight="@dimen/margin_2"
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/margin_1"
+            android:layout_marginRight="@dimen/margin_2"
+            android:background="@drawable/rect_solid_light_black_round_15"
+            android:layout_centerInParent="true"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/search_icon_gray"
+                android:layout_marginLeft="@dimen/margin_2"
+                />
+
+            <TextView
+                android:id="@+id/search_tv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_2"
+                android:layout_marginRight="@dimen/margin_1"
+                android:textColorHint="@color/light_black"
+                android:hint="输入商家姓名"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:inputType="text"
+                android:imeOptions="actionSearch"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/divider_line"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_height_45dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+
+        <CheckBox
+            android:id="@+id/area_cb"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:button="@null"
+            android:text="景点选择"
+            android:textColor="@drawable/selector_cb_color_blue"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingLeft="@dimen/margin_10dp"
+            android:paddingRight="@dimen/margin_10dp"
+            android:layout_gravity="center"
+            android:drawableRight="@drawable/selector_cb_down_direction"
+            />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="25dp"
+            android:background="@color/divider_line"
+            />
+
+        <CheckBox
+            android:id="@+id/type_cb"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:button="@null"
+            android:text="商家类型"
+            android:textColor="@drawable/selector_cb_color_blue"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingLeft="@dimen/margin_10dp"
+            android:paddingRight="@dimen/margin_10dp"
+            android:layout_gravity="center"
+            android:drawableRight="@drawable/selector_cb_down_direction"
+            />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="25dp"
+            android:background="@color/divider_line"
+            />
+
+        <CheckBox
+            android:id="@+id/sort_cb"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:button="@null"
+            android:text="智能排序"
+            android:textColor="@drawable/selector_cb_color_blue"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingLeft="@dimen/margin_10dp"
+            android:paddingRight="@dimen/margin_10dp"
+            android:layout_gravity="center"
+            android:drawableRight="@drawable/selector_cb_down_direction"
+            />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="25dp"
+            android:background="@color/divider_line"
+            />
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/margin_2"
+            android:paddingRight="@dimen/margin_2"
+            android:button="@null"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:drawableRight="@drawable/selector_prompt_cb_image_direction"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/divider_line"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.zjhj.tour.widget.BestSwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+        </com.zjhj.tour.widget.BestSwipeRefreshLayout>
+
+        <com.zjhj.tour.widget.BestSwipeRefreshLayout
+            android:id="@+id/smallswipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/smallrecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+        </com.zjhj.tour.widget.BestSwipeRefreshLayout>
+
+
+        <View
+            android:id="@+id/bg_color"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#80000000"
+            android:visibility="gone"
+            />
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

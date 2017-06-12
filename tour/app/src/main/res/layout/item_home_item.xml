@@ -21,6 +21,17 @@
         android:layout_gravity="center"
         />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="14dp"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:src="@mipmap/uncollect"
+        android:visibility="gone"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -39,9 +50,10 @@
 
             <TextView
                 android:id="@+id/title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
                 android:layout_height="wrap_content"
-                android:text="景阳大酒店"
+                android:text=""
                 android:textSize="@dimen/text_big_xx"
                 android:textColor="@color/shop_white"
                 android:textStyle="bold"
@@ -50,19 +62,40 @@
                 android:ellipsize="end"
                 />
 
-            <TextView
-                android:id="@+id/price"
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:layout_height="wrap_content"
-                android:text="8.5折"
-                android:textSize="@dimen/text_big_x"
-                android:textColor="@color/shop_white"
-                android:textStyle="bold"
                 android:layout_marginLeft="30dp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                />
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="@dimen/text_big_x"
+                    android:textColor="@color/shop_white"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    />
+
+                <TextView
+                    android:id="@+id/customer_consumption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/shop_white"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_marginLeft="@dimen/margin_2"
+                    />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -78,22 +111,21 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="满碗佳肴满香店，花苑情谊客满楼"
+                android:text=""
                 android:textSize="@dimen/text_normal"
                 android:textColor="@color/shop_white"
-                android:textStyle="bold"
                 android:layout_marginLeft="@dimen/margin_10dp"
                 android:maxLines="1"
                 android:ellipsize="end"
                 />
 
             <TextView
+                android:id="@+id/distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2.6 KM"
+                android:text=""
                 android:textSize="@dimen/text_normal"
                 android:textColor="@color/shop_white"
-                android:textStyle="bold"
                 android:layout_marginLeft="11dp"
                 android:maxLines="1"
                 android:ellipsize="end"

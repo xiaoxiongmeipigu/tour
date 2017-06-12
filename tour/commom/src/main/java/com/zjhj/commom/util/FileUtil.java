@@ -18,7 +18,7 @@ import java.io.File;
 public class FileUtil {
     public final static String TYPE_IMAGE = "image";
     private final static String rootPath = "jgj";
-
+    public final static String TYPE_DB = "tour_search_history";
     /**
      * 判断SD卡是否可用
      *

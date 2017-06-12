@@ -20,37 +20,44 @@ public class JGJDataSource {
     public static final String TYPE_TUIHUO = 0x06+"";
     public static final String TYPE_VIP = 0x07+"";
     public static final String TYPE_MORE = 0x08+"";
-    /**
-     * 获取所长/站长功能菜单
-     * @return
-     */
-    public static List<MapiResourceResult> getMainResource(){
+
+    public static List<MapiResourceResult> getArea(){
         List<MapiResourceResult> list = new ArrayList<>();
-        list.add(new MapiResourceResult(TYPE_XIANHUO,"现货"));
-        list.add(new MapiResourceResult(TYPE_XIANDAN,"下单"));
-        list.add(new MapiResourceResult(TYPE_PINTUAN,"拼单"));
-        list.add(new MapiResourceResult(TYPE_HUODONG,"活动"));
-        list.add(new MapiResourceResult(TYPE_VIP,"VIP"));
-        list.add(new MapiResourceResult(TYPE_DINGZHI,"来样定制"));
-        list.add(new MapiResourceResult(TYPE_TUIHUO,"售后"));
-        list.add(new MapiResourceResult(TYPE_MORE,"更多"));
+        list.add(new MapiResourceResult("0","全部"));
+        list.add(new MapiResourceResult("0","丽江"));
+        list.add(new MapiResourceResult("0","马尔代夫"));
+        list.add(new MapiResourceResult("0","九寨沟"));
+        list.add(new MapiResourceResult("0","三亚"));
+        list.add(new MapiResourceResult("0","普陀山"));
+        list.add(new MapiResourceResult("0","乌镇"));
+        list.add(new MapiResourceResult("0","九华山"));
+        list.add(new MapiResourceResult("0","成都"));
+        list.add(new MapiResourceResult("0","五台山"));
+        list.add(new MapiResourceResult("0","凤凰古城"));
+
         return list;
     }
 
-    /**
-     * 获取头条
-     * @return
-     */
-    public static List<MapiResourceResult> getHeadResource(){
+    public static List<MapiResourceResult> getType() {
         List<MapiResourceResult> list = new ArrayList<>();
-        list.add(new MapiResourceResult(TYPE_XIANHUO,"星尚阁欢迎您"));
-        list.add(new MapiResourceResult(TYPE_XIANDAN,"恭喜小熊成功加入会员"));
-        list.add(new MapiResourceResult(TYPE_HUODONG,"恭喜大福成功加入会员"));
-        list.add(new MapiResourceResult(TYPE_PINTUAN,"恭喜萌萌梅成功加入会员"));
-        list.add(new MapiResourceResult(TYPE_DINGZHI,"恭喜123423424234成功加入会员"));
-        list.add(new MapiResourceResult(TYPE_TUIHUO,"恭喜23423423423423成功加入会员"));
-        list.add(new MapiResourceResult(TYPE_VIP,"恭喜23424234234成功加入会员"));
-        list.add(new MapiResourceResult(TYPE_MORE,"恭喜东东成功加入会员"));
+        list.add(new MapiResourceResult("0", "全部"));
+        list.add(new MapiResourceResult("0", "少数名族"));
+        list.add(new MapiResourceResult("0", "社会餐厅"));
+        list.add(new MapiResourceResult("0", "温泉"));
+        list.add(new MapiResourceResult("0", "连锁餐厅"));
+        list.add(new MapiResourceResult("0", "农家乐"));
+        list.add(new MapiResourceResult("0", "茶餐厅"));
+        list.add(new MapiResourceResult("0", "异域风情"));
+        return list;
+    }
+
+    public static List<MapiResourceResult> getSort() {
+        List<MapiResourceResult> list = new ArrayList<>();
+        list.add(new MapiResourceResult("1", "智能排序"));
+        list.add(new MapiResourceResult("1", "离我最近"));
+        list.add(new MapiResourceResult("2", "人气最高"));
+        list.add(new MapiResourceResult("3", "好评优先"));
+        list.add(new MapiResourceResult("4", "用餐最低标准"));
         return list;
     }
 

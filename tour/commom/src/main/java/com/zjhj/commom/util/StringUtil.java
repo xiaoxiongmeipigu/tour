@@ -158,6 +158,16 @@ public class StringUtil {
     }
 
     /**
+     * 格式化，两个小数点
+     * @param price
+     * @return
+     */
+    public static String numberFormat(double price){
+        DecimalFormat df = new DecimalFormat("#0.00");
+        return df.format(price);
+    }
+
+    /**
      * 格式化，姓名
      * @param name
      * @return
@@ -193,6 +203,28 @@ public class StringUtil {
         Matcher matcher = pattern.matcher(str);
         return matcher.find();
 
+    }
+
+    /**
+     * 手机号用****号隐藏中间数字
+     *
+     * @param phone
+     * @return
+     */
+    public static String settingphone(String phone) {
+        String phone_s = phone.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2");
+        return phone_s;
+    }
+
+
+    /**
+     * 邮箱用****号隐藏前面的字母
+     *
+     * @return
+     */
+    public static String settingemail(String email) {
+        String emails = email.replaceAll("(\\w?)(\\w+)(\\w)(@\\w+\\.[a-z]+(\\.[a-z]+)?)", "$1****$3$4");
+        return emails;
     }
 
 }

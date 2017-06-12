@@ -24,16 +24,12 @@ import com.zjhj.tour.widget.LoadingDialog;
  */
 public class BaseActivity extends AppCompatActivity {
 
-    protected UserSP userSP;
+    public UserSP userSP;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         userSP = new UserSP(AppContext.getInstance());
-    }
-
-    public boolean checkVip(){
-        return userSP.checkVip();
     }
 
     public boolean checkLogin() {

@@ -17,6 +17,7 @@ import com.zjhj.tour.R;
 import com.zjhj.tour.adapter.HomeItemAdapter;
 import com.zjhj.tour.adapter.ItemAdapter;
 import com.zjhj.tour.interfaces.RecyOnItemClickListener;
+import com.zjhj.tour.util.ControllerUtil;
 import com.zjhj.tour.widget.DividerListItemDecoration;
 
 import java.util.ArrayList;
@@ -76,7 +77,8 @@ public class HomeItemShopLayout extends RelativeLayout {
         mAdapter.setOnItemClickListener(new RecyOnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                MapiItemResult mapiItemResult = (MapiItemResult) mList.get(position).getData();
+                ControllerUtil.go2ShopDetail(mapiItemResult.getMerchant_id());
             }
         });
 
@@ -89,16 +91,20 @@ public class HomeItemShopLayout extends RelativeLayout {
 
     private void initData(List<MapiItemResult> list) {
 
-        mList.add(new IndexData(0, "ITEM",new ArrayList<MapiResourceResult>()));
-        mList.add(new IndexData(1, "DIVIDER",new ArrayList<MapiResourceResult>()));
-        mList.add(new IndexData(2, "ITEM",new ArrayList<MapiResourceResult>()));
-        mList.add(new IndexData(3, "DIVIDER",new ArrayList<MapiResourceResult>()));
-        mList.add(new IndexData(4, "ITEM",new ArrayList<MapiResourceResult>()));
-        mList.add(new IndexData(5, "DIVIDER",new ArrayList<MapiResourceResult>()));
-       /* if(null==list||list.isEmpty())
+
+        if(null==list||list.isEmpty())
             return;
-        mList.addAll(list);
-        mAdapter.notifyDataSetChanged();*/
+        int count = 0;
+        int pos = 0;
+        for(MapiItemResult mapiItemResult : list){
+            pos++;
+            mList.add(new IndexData(count++, "ITEM", mapiItemResult));
+            if (pos <list.size())
+                mList.add(new IndexData(count++, "DIVIDER", new ArrayList<MapiResourceResult>()));
+        }
+
+        mAdapter.notifyDataSetChanged();
+
     }
 
 
@@ -112,7 +118,7 @@ public class HomeItemShopLayout extends RelativeLayout {
 
     @OnClick(R.id.ll_more)
     public void onClick() {
-
+        ControllerUtil.go2ShopList("");
     }
 
 }

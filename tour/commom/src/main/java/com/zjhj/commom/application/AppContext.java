@@ -18,6 +18,8 @@ import com.zjhj.commom.util.FileUtil;
 
 import org.xutils.x;
 
+import cn.jpush.android.api.JPushInterface;
+
 
 /**
  * Created by brain on 2016/6/14.
@@ -84,7 +86,7 @@ public class AppContext extends Application {
         Fresco.initialize(this);
         x.Ext.init(this);
         x.Ext.setDebug(BuildConfig.DEBUG); // 是否输出debug日志
-//        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
-//        JPushInterface.init(this);     		// 初始化 JPush
+        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);     		// 初始化 JPush
     }
 }

@@ -59,6 +59,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof SliderViewHolder) {
+            ((SliderViewHolder)holder).homeSliderLayout.setSlider(true);
             ((SliderViewHolder)holder).homeSliderLayout.load((List<MapiResourceResult>) mList.get(position).getData());
         }else if(holder instanceof ItemHotViewHolder){
             ((ItemHotViewHolder)holder).homeItemHotLayout.load((List<MapiItemResult>) mList.get(position).getData());

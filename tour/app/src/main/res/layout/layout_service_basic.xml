@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="17dp"
+    android:paddingBottom="17dp"
+    android:paddingLeft="@dimen/margin_2"
+    android:paddingRight="@dimen/margin_2"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="酒店基本信息"
+        android:textSize="@dimen/text_big_xx"
+        android:textColor="@color/shop_black"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        />
+    
+    <LinearLayout
+        android:id="@+id/name_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="17dp"
+        >
+        
+        <TextView
+            android:layout_width="95dp"
+            android:layout_height="wrap_content"
+            android:text="酒店名称："
+            android:textSize="@dimen/text_big"
+            android:textColor="@color/shop_black"
+            />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/text_big"
+            android:textColor="@color/shop_black"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:lineSpacingMultiplier="1.3"
+            />
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/address_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="14dp"
+        >
+
+        <TextView
+            android:layout_width="95dp"
+            android:layout_height="wrap_content"
+            android:text="酒店地址："
+            android:textSize="@dimen/text_big"
+            android:textColor="@color/shop_black"
+            />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/text_big"
+            android:textColor="@color/shop_black"
+            android:lineSpacingMultiplier="1.3"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/desc_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="14dp"
+        >
+
+        <TextView
+            android:layout_width="95dp"
+            android:layout_height="wrap_content"
+            android:text="酒店简介："
+            android:textSize="@dimen/text_big"
+            android:textColor="@color/shop_black"
+            />
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/text_big"
+            android:textColor="@color/shop_black"
+            android:lineSpacingMultiplier="1.3"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/population_max_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="14dp"
+        >
+
+        <TextView
+            android:layout_width="95dp"
+            android:layout_height="wrap_content"
+            android:text="酒店容纳量："
+            android:textSize="@dimen/text_big"
+            android:textColor="@color/shop_black"
+            />
+
+        <TextView
+            android:id="@+id/population_max"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/text_big"
+            android:textColor="@color/shop_black"
+            android:lineSpacingMultiplier="1.3"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/parking_location_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="14dp"
+        >
+
+        <TextView
+            android:layout_width="95dp"
+            android:layout_height="wrap_content"
+            android:text="停车位置："
+            android:textSize="@dimen/text_big"
+            android:textColor="@color/shop_black"
+            />
+
+        <TextView
+            android:id="@+id/parking_location"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/text_big"
+            android:textColor="@color/shop_black"
+            android:lineSpacingMultiplier="1.3"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -116,7 +116,7 @@ public class MyReceiver extends BroadcastReceiver {
 						msgIntent.putExtra(JpushUtil.KEY_EXTRAS, extras);
 					}
 				} catch (JSONException e) {
-
+					e.printStackTrace();
 				}
 
 			}

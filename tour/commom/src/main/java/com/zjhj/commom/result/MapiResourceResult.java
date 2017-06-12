@@ -9,7 +9,6 @@ public class MapiResourceResult extends MapiBaseResult {
     private String ZD_ID;
     private String remark;
     private int version;
-    private String url;
     private String poster;
     private String title;
 
@@ -20,6 +19,53 @@ public class MapiResourceResult extends MapiBaseResult {
 
     private boolean isSel;
     private String img;
+    private String img_url;
+    private String url;
+    private String pic_url;
+    private String use_begin_time;
+    private String use_end_time;
+
+    private String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getUse_begin_time() {
+        return use_begin_time;
+    }
+
+    public void setUse_begin_time(String use_begin_time) {
+        this.use_begin_time = use_begin_time;
+    }
+
+    public String getUse_end_time() {
+        return use_end_time;
+    }
+
+    public void setUse_end_time(String use_end_time) {
+        this.use_end_time = use_end_time;
+    }
+
+    public String getPic_url() {
+        return pic_url;
+    }
+
+    public void setPic_url(String pic_url) {
+        this.pic_url = pic_url;
+    }
+
+    public String getImg_url() {
+        return img_url;
+    }
+
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
+    }
 
     public String getImg() {
         return img;

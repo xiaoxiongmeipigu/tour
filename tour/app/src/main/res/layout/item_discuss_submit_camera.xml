@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="105dp"
+    android:layout_height="80dp"
+    android:orientation="vertical"
+    android:background="@drawable/rect_solid_color_white_stroke_divider_round_0"
+    android:gravity="center"
+    android:id="@+id/root_view"
+    android:layout_marginTop="@dimen/margin_10dp"
+    >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/camera"
+    />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="上传照片"
+        android:textSize="@dimen/text_big"
+        android:textColor="#aaaaaa"
+        android:layout_marginTop="7dp"
+    />
+
+</LinearLayout>
