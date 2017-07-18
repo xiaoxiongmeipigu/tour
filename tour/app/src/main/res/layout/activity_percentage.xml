@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zjhj.tour.activity.percentage.PercentageActivity"
+    android:background="@color/background_gray"
+    android:orientation="vertical"
+    >
+
+    <include
+        layout="@layout/lay_header"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@mipmap/percentage_bg"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/margin_3"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="剩余总额"
+                android:textSize="@dimen/text_big"
+                android:textColor="@color/shop_white"
+                android:layout_marginLeft="@dimen/margin_2"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/margin_1"
+                >
+
+                <TextView
+                    android:id="@+id/money_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/shop_white"
+                    android:textSize="27sp"
+                    android:layout_marginLeft="@dimen/margin_2"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="元"
+                    android:textColor="@color/shop_white"
+                    android:textSize="@dimen/text_big"
+                    android:layout_marginLeft="2dp"
+                    />
+
+                <TextView
+                    android:id="@+id/apply"
+                    android:layout_width="50dp"
+                    android:layout_height="28dp"
+                    android:text="提现"
+                    android:textColor="@color/shop_white"
+                    android:textSize="@dimen/text_big_x"
+                    android:background="@drawable/rect_solid_color_trans_stroke_white_round_8"
+                    android:layout_marginLeft="@dimen/margin_3"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/margin_10dp"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:id="@+id/total_tv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:gravity="center"
+                android:textSize="@dimen/text_big"
+                android:textStyle="bold"
+                android:textColor="@color/shop_white"
+                />
+
+            <TextView
+                android:id="@+id/cash_tv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:gravity="center"
+                android:textSize="@dimen/text_big"
+                android:textStyle="bold"
+                android:textColor="@color/shop_white"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/more_ll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_height_45dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/shop_white"
+        android:layout_marginTop="@dimen/margin_1"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="最新动态"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/text_big"
+            android:layout_marginLeft="@dimen/margin_2"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_2"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="更多"
+                android:textSize="@dimen/text_small"
+                android:textColor="@color/light_black"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/right"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/background_gray"
+        android:id="@+id/divider_view"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

@@ -10,11 +10,12 @@
         layout="@layout/lay_header"
         />
 
-    <ScrollView
+    <com.zjhj.tour.widget.MyScrollview
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.zjhj.tour.activity.RegisterActivity"
         android:scrollbars="none"
+        android:id="@+id/scrollView"
         >
 
         <LinearLayout
@@ -51,6 +52,7 @@
                     android:textColorHint="@color/light_black"
                     android:textSize="@dimen/text_big"
                     android:background="@null"
+                    android:maxLines="1"
                     />
 
                 <ImageView
@@ -154,6 +156,7 @@
                     android:textSize="@dimen/text_big"
                     android:background="@null"
                     android:maxLength="6"
+                    android:maxLines="1"
                     />
 
                 <ImageView
@@ -176,7 +179,7 @@
                     android:layout_marginRight="@dimen/margin_2"
                     android:gravity="center"
                     android:background="@drawable/rect_solid_white_stroke_yellow"
-                    android:minWidth="110dp"
+                    android:minWidth="100dp"
                     android:paddingLeft="@dimen/margin_1"
                     android:paddingRight="@dimen/margin_1"
                     />
@@ -187,6 +190,62 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/divider_line"
+                android:layout_marginLeft="@dimen/margin_2"
+                android:layout_marginRight="@dimen/margin_2"
+                />
+
+        <LinearLayout
+            android:id="@+id/city_ll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/text_height_50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="选择城市"
+                android:textSize="@dimen/text_big_x"
+                android:textStyle="bold"
+                android:textColor="@color/shop_black"
+                android:layout_marginLeft="@dimen/margin_2"
+                />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:layout_marginRight="@dimen/margin_2"
+                >
+
+                <TextView
+                    android:id="@+id/addr_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="点击选择城市"
+                    android:textSize="@dimen/text_big"
+                    android:textColor="@color/light_black"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/right"
+                    android:layout_marginLeft="@dimen/margin_1"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/divider_line"
+                android:layout_marginLeft="@dimen/margin_2"
+                android:layout_marginRight="@dimen/margin_2"
                 />
 
             <LinearLayout
@@ -217,6 +276,7 @@
                     android:textColorHint="@color/light_black"
                     android:textSize="@dimen/text_big"
                     android:background="@null"
+                    android:maxLines="1"
                     />
 
                 <ImageView
@@ -267,6 +327,7 @@
                     android:textColorHint="@color/light_black"
                     android:textSize="@dimen/text_big"
                     android:background="@null"
+                    android:maxLines="1"
                     />
 
                 <ImageView
@@ -299,7 +360,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="推  荐  人"
+                    android:text="邀  请  码"
                     android:textSize="@dimen/text_big_x"
                     android:textStyle="bold"
                     android:textColor="@color/shop_black"
@@ -313,12 +374,11 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:layout_marginLeft="@dimen/margin_2"
-                    android:hint="请输入推荐人手机号"
+                    android:hint="请输入邀请码"
                     android:textColorHint="@color/light_black"
                     android:textSize="@dimen/text_big"
                     android:background="@null"
-                    android:inputType="phone"
-                    android:maxLines="11"
+                    android:maxLines="1"
                     />
 
                 <ImageView
@@ -501,6 +561,45 @@
                 android:layout_marginRight="@dimen/margin_2"
                 />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="@dimen/margin_2"
+                android:orientation="horizontal"
+                android:gravity="center"
+                >
+
+                <ImageView
+                    android:id="@+id/gree_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ungree_logo"
+                    android:paddingLeft="@dimen/margin_1"
+                    android:paddingRight="@dimen/margin_1"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="已阅读并同意"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/text_normal"
+                    />
+
+                <TextView
+                    android:id="@+id/protocol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="《游助网用户协议》"
+                    android:textColor="@color/shop_blue"
+                    android:textSize="@dimen/text_normal"
+                    android:paddingLeft="@dimen/margin_1"
+                    android:paddingRight="@dimen/margin_1"
+                    android:gravity="center_vertical"
+                    />
+
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/submit"
                 android:layout_width="match_parent"
@@ -517,7 +616,7 @@
                 />
 
         </LinearLayout>
-    </ScrollView>
+    </com.zjhj.tour.widget.MyScrollview>
 
 </LinearLayout>
 

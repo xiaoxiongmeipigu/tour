@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.drawee.backends.pipeline.BuildConfig;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.mob.MobSDK;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
@@ -82,6 +83,9 @@ public class AppContext extends Application {
         }catch(Exception e){
             e.printStackTrace();
         }
+
+        // 通过代码注册你的AppKey和AppSecret
+        MobSDK.init(this, "1eb0a2a13a7c0", "5e4bbcc7373b208c86a2987010137129");
 
         Fresco.initialize(this);
         x.Ext.init(this);

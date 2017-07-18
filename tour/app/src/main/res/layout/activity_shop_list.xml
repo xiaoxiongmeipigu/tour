@@ -51,11 +51,21 @@
                 android:layout_marginLeft="@dimen/margin_2"
                 android:layout_marginRight="@dimen/margin_1"
                 android:textColorHint="@color/light_black"
-                android:hint="输入商家姓名"
+                android:hint="输入商家名称或景点名称"
                 android:singleLine="true"
                 android:maxLines="1"
                 android:inputType="text"
                 android:imeOptions="actionSearch"
+                />
+
+            <ImageView
+                android:id="@+id/clear_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@mipmap/clear"
+                android:paddingLeft="@dimen/margin_10dp"
+                android:paddingRight="@dimen/margin_10dp"
+                android:visibility="gone"
                 />
 
         </LinearLayout>
@@ -89,12 +99,14 @@
             android:paddingRight="@dimen/margin_10dp"
             android:layout_gravity="center"
             android:drawableRight="@drawable/selector_cb_down_direction"
+            android:visibility="gone"
             />
 
         <View
             android:layout_width="0.5dp"
             android:layout_height="25dp"
             android:background="@color/divider_line"
+            android:visibility="gone"
             />
 
         <CheckBox

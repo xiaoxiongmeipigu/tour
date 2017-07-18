@@ -5,24 +5,20 @@
     android:layout_height="match_parent"
     tools:context="com.zjhj.tour.activity.shop.ShopDetailActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-
     <RelativeLayout
         android:id="@+id/lay_header"
         android:layout_width="match_parent"
         android:layout_height="@dimen/text_height_45dp"
         android:gravity="center"
+        android:background="@color/shop_blue"
         >
 
-        <View
+       <!-- <View
             android:id="@+id/bg_view"
             android:layout_width="match_parent"
             android:layout_height="@dimen/text_height_45dp"
             android:background="@color/shop_blue"
-            />
+            />-->
 
         <ImageView
             android:id="@+id/back"
@@ -34,33 +30,52 @@
             android:src="@mipmap/back_white"
             />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="酒店信息"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_big_x"
+            android:textColor="@color/shop_white"
+            />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:layout_marginRight="3dp"
             >
 
             <ImageView
                 android:id="@+id/purcase"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingLeft="@dimen/margin_2"
-                android:paddingRight="13dp"
                 android:src="@mipmap/purcase"
+                android:paddingLeft="@dimen/margin_1"
+                android:paddingRight="13dp"
                 />
 
             <ImageView
                 android:id="@+id/share"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingLeft="13dp"
-                android:paddingRight="@dimen/margin_2"
                 android:src="@mipmap/share"
+                android:paddingLeft="@dimen/margin_1"
+                android:paddingRight="13dp"
                 />
 
         </LinearLayout>
 
     </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/lay_header"
+        ></android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

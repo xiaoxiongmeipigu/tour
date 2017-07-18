@@ -199,7 +199,6 @@ public class ForgetPsdActivity extends BaseActivity {
                 imageEt.setText("");
                 break;
             case R.id.request_img:
-                MainToast.showShortToast("换衣");
                 getImg();
                 break;
             case R.id.clear_code:

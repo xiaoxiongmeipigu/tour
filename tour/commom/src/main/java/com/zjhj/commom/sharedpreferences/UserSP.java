@@ -17,6 +17,7 @@ public class UserSP extends AbstractSP {
     private final static String KEY_SP_USER_GUIDE = "house_user_guide";
     private final static String KEY_SP_Resources = "house.resources";
     private final static String KEY_SP_Alias = "house_user_Alias";
+    private final static String KEY_SP_CITY_JSON = "tour.cityjson";
 
     public UserSP(Context context) {
         super(context);
@@ -28,6 +29,10 @@ public class UserSP extends AbstractSP {
 
     public void saveUserAddr(MapiCityItemResult mapiCityItemResult) {
         sharedPreferences.edit().putString(KEY_SP_ADDR, JSONObject.toJSONString(mapiCityItemResult)).commit();
+    }
+
+    public void saveCityJson(String city){
+        sharedPreferences.edit().putString(KEY_SP_CITY_JSON,city).commit();
     }
 
     public MapiUserResult getUserBean() {
@@ -45,6 +50,15 @@ public class UserSP extends AbstractSP {
         }
         return JSONObject.parseObject(userJsonStr, MapiCityItemResult.class);
     }
+
+    public String getCityJson() {
+        String userJsonStr = sharedPreferences.getString(KEY_SP_CITY_JSON, null);
+        if (TextUtils.isEmpty(userJsonStr)) {
+            return "";
+        }
+        return userJsonStr;
+    }
+
 
     public void saveResource(String json){
         sharedPreferences.edit().putString(KEY_SP_Resources, json).commit();

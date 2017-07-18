@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -41,6 +42,8 @@ public class FoodInfoLayout extends RelativeLayout {
     TextView originalPrice;
     @Bind(R.id.content_tv)
     TextView contentTv;
+    @Bind(R.id.content_ll)
+    LinearLayout contentLl;
 
     private Context mContext;
     private View view;
@@ -96,11 +99,16 @@ public class FoodInfoLayout extends RelativeLayout {
                     .build();
             image.setController(controller);
 
-            merchantName.setText(TextUtils.isEmpty(mapiFoodResult.getMerchant_name())?"":mapiFoodResult.getMerchant_name());
-            setMealName.setText(TextUtils.isEmpty(mapiFoodResult.getSet_meal_name())?"":mapiFoodResult.getSet_meal_name());
-            salesVolume.setText("已售:  "+(TextUtils.isEmpty(mapiFoodResult.getSales_volume())?"":mapiFoodResult.getSales_volume()));
-            originalPrice.setText(TextUtils.isEmpty(mapiFoodResult.getOriginal_price())?"":mapiFoodResult.getOriginal_price());
-            contentTv.setText(TextUtils.isEmpty(mapiFoodResult.getContent())?"":mapiFoodResult.getContent());
+            merchantName.setText(TextUtils.isEmpty(mapiFoodResult.getMerchant_name()) ? "" : mapiFoodResult.getMerchant_name());
+            setMealName.setText(TextUtils.isEmpty(mapiFoodResult.getSet_meal_name()) ? "" : mapiFoodResult.getSet_meal_name());
+            salesVolume.setText("已售:  " + (TextUtils.isEmpty(mapiFoodResult.getSales_volume()) ? "" : mapiFoodResult.getSales_volume()));
+            originalPrice.setText(TextUtils.isEmpty(mapiFoodResult.getOriginal_price()) ? "" : mapiFoodResult.getOriginal_price());
+            if (TextUtils.isEmpty(mapiFoodResult.getContent()))
+                contentLl.setVisibility(View.GONE);
+            else {
+                contentLl.setVisibility(View.VISIBLE);
+                contentTv.setText(mapiFoodResult.getContent());
+            }
         }
 
     }

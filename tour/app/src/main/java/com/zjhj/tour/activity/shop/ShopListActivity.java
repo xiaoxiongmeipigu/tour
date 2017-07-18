@@ -17,7 +17,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.zjhj.commom.api.CommonApi;
 import com.zjhj.commom.api.ItemApi;
-import com.zjhj.commom.application.AppContext;
 import com.zjhj.commom.result.IndexData;
 import com.zjhj.commom.result.MapiItemResult;
 import com.zjhj.commom.result.MapiResourceResult;
@@ -34,7 +33,6 @@ import com.zjhj.tour.base.RequestCode;
 import com.zjhj.tour.interfaces.RecyOnItemClickListener;
 import com.zjhj.tour.util.ControllerUtil;
 import com.zjhj.tour.util.JGJDataSource;
-import com.zjhj.tour.view.MaxHeightLayout;
 import com.zjhj.tour.widget.BestSwipeRefreshLayout;
 import com.zjhj.tour.widget.ItemPopWindow;
 
@@ -69,6 +67,8 @@ public class ShopListActivity extends BaseActivity {
     CheckBox typeCb;
     @Bind(R.id.sort_cb)
     CheckBox sortCb;
+    @Bind(R.id.clear_iv)
+    ImageView clearIv;
 
     HomeItemAdapter mAdapter;
     HomeItemAdapter smallAdapter;
@@ -76,6 +76,7 @@ public class ShopListActivity extends BaseActivity {
     List<IndexData> smallList;
 
     List<MapiItemResult> list;
+
 
 
     private boolean isSmall = false;
@@ -100,10 +101,13 @@ public class ShopListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_list);
         ButterKnife.bind(this);
-        if(null!=getIntent())
+        if (null != getIntent())
             keyword = getIntent().getStringExtra("keyword");
-        if(TextUtils.isEmpty(keyword))
+        if (TextUtils.isEmpty(keyword)) {
             keyword = "";
+            clearIv.setVisibility(View.GONE);
+        }else
+            clearIv.setVisibility(View.VISIBLE);
         initView();
         initBigView();
         initSmallView();
@@ -333,36 +337,36 @@ public class ShopListActivity extends BaseActivity {
     private void loadData() {
         showLoading();
         String city_id = "";
-        if(null!=userSP.getUserAddr())
-            city_id = TextUtils.isEmpty(userSP.getUserAddr().getCity_id())?"":userSP.getUserAddr().getCity_id();
+        if (null != userSP.getUserAddr())
+            city_id = TextUtils.isEmpty(userSP.getUserAddr().getCity_id()) ? "" : userSP.getUserAddr().getCity_id();
         showLoading();
         CommonApi.defaultunion(this, city_id, new RequestCallback<JSONObject>() {
             @Override
             public void success(JSONObject success) {
                 hideLoading();
 
-                List<MapiResourceResult> areas = JSONArray.parseArray(success.getJSONObject("data").getJSONObject("scenic_spot").getJSONArray("list").toJSONString(),MapiResourceResult.class);
-                List<MapiResourceResult> types = JSONArray.parseArray(success.getJSONObject("data").getJSONArray("restaurant_cat").toJSONString(),MapiResourceResult.class);
+                List<MapiResourceResult> areas = JSONArray.parseArray(success.getJSONObject("data").getJSONObject("scenic_spot").getJSONArray("list").toJSONString(), MapiResourceResult.class);
+                List<MapiResourceResult> types = JSONArray.parseArray(success.getJSONObject("data").getJSONArray("restaurant_cat").toJSONString(), MapiResourceResult.class);
 
-                if(null!=areas&&!areas.isEmpty()){
+                if (null != areas && !areas.isEmpty()) {
                     areaList.clear();
                     areaList.addAll(areas);
                     MapiResourceResult resourceResult = new MapiResourceResult();
                     resourceResult.setId("");
                     resourceResult.setName("全部");
-                    areaList.add(0,resourceResult);
+                    areaList.add(0, resourceResult);
 //                    areaList.addAll(JGJDataSource.getArea());
                     areaPop.refreshData(areaList);
                 }
 
-                if(null!=types&&!types.isEmpty()){
+                if (null != types && !types.isEmpty()) {
                     typeList.clear();
                     typeList.addAll(types);
 //                    typeList.addAll(JGJDataSource.getType());
                     MapiResourceResult resourceResult = new MapiResourceResult();
                     resourceResult.setId("");
                     resourceResult.setName("全部");
-                    typeList.add(0,resourceResult);
+                    typeList.add(0, resourceResult);
                     typePop.refreshData(typeList);
                 }
 
@@ -387,14 +391,14 @@ public class ShopListActivity extends BaseActivity {
         String longitude = "";
         String latitude = "";
 
-        if(null!=userSP.getUserAddr()){
+        if (null != userSP.getUserAddr()) {
             city_id = TextUtils.isEmpty(userSP.getUserAddr().getCity_id()) ? "" : userSP.getUserAddr().getCity_id();
             longitude = TextUtils.isEmpty(userSP.getUserAddr().getLongitude()) ? "" : userSP.getUserAddr().getLongitude();
             latitude = TextUtils.isEmpty(userSP.getUserAddr().getLatitude()) ? "" : userSP.getUserAddr().getLatitude();
         }
 
         showLoading();
-        ItemApi.defaultlist(this, keyword, filterStrs[0], filterStrs[1], filterStrs[2], "", city_id, "", longitude, latitude, pageIndex + "",pageNum+"", new RequestPageCallback<List<MapiItemResult>>() {
+        ItemApi.defaultlist(this, keyword, filterStrs[0], filterStrs[1], filterStrs[2], "", city_id, "", longitude, latitude, pageIndex + "", pageNum + "", new RequestPageCallback<List<MapiItemResult>>() {
             @Override
             public void success(Integer isNext, List<MapiItemResult> success) {
                 hideLoading();
@@ -405,7 +409,7 @@ public class ShopListActivity extends BaseActivity {
                     return;
                 list.clear();
                 list.addAll(success);
-                DebugLog.i("list.size=>"+list.size());
+                DebugLog.i("list.size=>" + list.size());
                 initBigData(list);
                 initSmallData(list);
             }
@@ -462,7 +466,7 @@ public class ShopListActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.back, R.id.area_cb, R.id.type_cb, R.id.sort_cb,R.id.search_tv})
+    @OnClick({R.id.back, R.id.area_cb, R.id.type_cb, R.id.sort_cb, R.id.search_tv,R.id.clear_iv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back:
@@ -471,50 +475,57 @@ public class ShopListActivity extends BaseActivity {
             case R.id.area_cb:
 
 
-                    if (null != areaPop) {
-                        areaPop.showPopupWindow(view);
-                        bgColor.setVisibility(View.VISIBLE);
-                    }
+                if (null != areaPop) {
+                    areaPop.showPopupWindow(view);
+                    bgColor.setVisibility(View.VISIBLE);
+                }
 
 
                 break;
             case R.id.type_cb:
 
-                    if (null != typePop) {
-                        typePop.showPopupWindow(view);
-                        bgColor.setVisibility(View.VISIBLE);
-                    }
+                if (null != typePop) {
+                    typePop.showPopupWindow(view);
+                    bgColor.setVisibility(View.VISIBLE);
+                }
 
                 break;
             case R.id.sort_cb:
 
 
-                    if (null != sortPop) {
-                        sortPop.showPopupWindow(view);
-                        bgColor.setVisibility(View.VISIBLE);
-                    }
+                if (null != sortPop) {
+                    sortPop.showPopupWindow(view);
+                    bgColor.setVisibility(View.VISIBLE);
+                }
 
                 break;
             case R.id.search_tv:
 
                 Intent intent = new Intent(ShopListActivity.this, HisSearchActivity.class);
-                startActivityForResult(intent,RequestCode.SEARCH_HIS);
+                startActivityForResult(intent, RequestCode.SEARCH_HIS);
 
+                break;
+            case R.id.clear_iv:
+                keyword = "";
+                searchTv.setText("");
+                refreshData();
+                clearIv.setVisibility(View.GONE);
                 break;
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode==RESULT_OK){
-            if(requestCode== RequestCode.SEARCH_HIS){
-                if(null!=data){
+        if (resultCode == RESULT_OK) {
+            if (requestCode == RequestCode.SEARCH_HIS) {
+                if (null != data) {
                     String key = data.getStringExtra("keyword");
-                    if(TextUtils.isEmpty(key))
+                    if (TextUtils.isEmpty(key))
                         keyword = "";
                     else
                         keyword = key;
                     searchTv.setText(keyword);
+                    clearIv.setVisibility(View.VISIBLE);
                     refreshData();
                 }
             }

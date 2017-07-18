@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">tour</string>
+    <string name="app_name">游助网</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tap">不限</string>
     <string name="confirm">确定</string>

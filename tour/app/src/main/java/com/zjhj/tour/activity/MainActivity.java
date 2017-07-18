@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -69,6 +70,7 @@ public class MainActivity extends BaseActivity {
     MainAdapter mAdapter;
 
     LocationUtil locationUtil;
+    private boolean isLoc = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,11 +114,26 @@ public class MainActivity extends BaseActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         mAdapter = new MainAdapter(this, mList);
         recyclerView.setAdapter(mAdapter);
-
-        showLoading();
         locationUtil = new LocationUtil(this);
-        locationUtil.startLoc();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(!locationUtil.isOPen(this)){
+            MainToast.showShortToast("请打开GPS定位");
+            isLoc = false;
+            Intent intent=new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivityForResult(intent,RequestCode.LOCATION_QUEST); //设置完成后返回到原来的界面
+        }else{
+            if(!isLoc){
+                isLoc = true;
+                showLoading();
+                locationUtil.startLoc();
+            }
+
+        }
     }
 
     @Override
@@ -322,6 +339,13 @@ public class MainActivity extends BaseActivity {
                         refreshData();
                     }
                     break;
+                case RequestCode.LOCATION_QUEST:
+                    if(null!=locationUtil) {
+                        isLoc = true;
+                        showLoading();
+                        locationUtil.startLoc();
+                    }
+                    break;
             }
         }
     }
@@ -369,6 +393,7 @@ public class MainActivity extends BaseActivity {
             }
         }
     }
+
 
     @Override
     protected void onDestroy() {

@@ -5,8 +5,12 @@ package com.zjhj.commom.api;
  */
 public class BasicApi {
 
-    public static String BASIC_URL = "http://daoyouzhu.mianke.me/api";
+    public static String BASIC_URL = "http://www.daoyouzhu.com/api";//daoyouzhu.mianke.me/api  http://www.daoyouzhu.com/api
     public static String BASIC_IMAGE = "http://122.225.92.10:8081/uploadFiles/uploadImgs/";
+    public static String SHARE_APP_URL = "http://www.daoyouzhu.com/site/app-download";
+    public static String SHARE_APP_LOGO_URL = "http://www.daoyouzhu.com/static/img/logo.png";
+    public static String PROTOCOL_GUIDE_URL = "http://www.daoyouzhu.com/guide-protocol.html";
+    public static String Percentage_EXPLAIN_URL = "http://www.daoyouzhu.com/site/rules";
 
     public static String loginUrl = "/passport/login";
     public static String smsLoginUrl = "/passport/sms-login";
@@ -45,4 +49,13 @@ public class BasicApi {
     public static String ordermodify = "/order/modify";
     public static String userfavoritelist = "/user/favorite-list";
     public static String usersetfavorite = "/user/set-favorite";
+    public static String defaultregion = "/default/region";
+    public static String userpartner = "/user/partner";
+    public static String userclosefriend = "/user/close-friend";
+    public static String userfriend = "/user/friend";
+    public static String usermoney = "/user/money";
+    public static String usermymerchant = "/user/my-merchant";
+    public static String usercash = "/user/cash";
+    public static String userapply = "/user/apply";
+
 }

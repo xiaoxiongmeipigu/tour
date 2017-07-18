@@ -47,6 +47,7 @@ public class CityActivity extends BaseActivity {
     List<IndexData> mList;
     CityListAdapter mAdapter;
 
+    String searchStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,11 +104,14 @@ public class CityActivity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                String newText = charSequence.toString().trim();
+                searchStr = newText;
                 if (charSequence.length() > 0) {
                     clearIv.setVisibility(View.VISIBLE);
                 } else {
                     clearIv.setVisibility(View.INVISIBLE);
                 }
+                refreshData();
             }
 
             @Override
@@ -156,7 +160,7 @@ public class CityActivity extends BaseActivity {
     private void load() {
 
         showLoading();
-        CommonApi.city(this, new RequestCallback<List<MapiCityResult>>() {
+        CommonApi.city(this, searchStr,new RequestCallback<List<MapiCityResult>>() {
             @Override
             public void success(List<MapiCityResult> success) {
                 hideLoading();

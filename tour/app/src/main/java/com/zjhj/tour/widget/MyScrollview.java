@@ -1,9 +1,12 @@
 package com.zjhj.tour.widget;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewConfiguration;
+import android.widget.EditText;
 import android.widget.ScrollView;
 
 /**
@@ -45,6 +48,14 @@ public class MyScrollview  extends ScrollView {
                 }
         }
         return super.onInterceptTouchEvent(e);
+    }
+
+    //Edittext中的文字过长时候，如果再次获取焦点则会使EditText向上滚动过多以至于无法正常显示文本
+    @Override
+    public boolean requestChildRectangleOnScreen(View child, Rect rectangle, boolean immediate) {
+        if (child instanceof EditText)
+            return true;
+        return false;
     }
 
 }

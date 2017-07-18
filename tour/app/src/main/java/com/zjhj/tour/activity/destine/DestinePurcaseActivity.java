@@ -7,15 +7,18 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.zjhj.commom.api.ItemApi;
 import com.zjhj.commom.result.MapiFoodResult;
 import com.zjhj.commom.result.MapiResourceResult;
+import com.zjhj.commom.result.MapiTasteResult;
 import com.zjhj.commom.util.DPUtil;
 import com.zjhj.commom.util.DateUtil;
 import com.zjhj.commom.util.DebugLog;
@@ -58,6 +61,10 @@ public class DestinePurcaseActivity extends BaseActivity {
     TextView timeTv;
     @Bind(R.id.mobile)
     TextView mobile;
+    @Bind(R.id.taste_tv)
+    TextView tasteTv;
+    @Bind(R.id.remark_et)
+    EditText remarkEt;
 
     TimePickerView pvTime;
     DinnerTiemDialog dinnerTiemDialog;
@@ -71,6 +78,10 @@ public class DestinePurcaseActivity extends BaseActivity {
     List<MapiResourceResult> timeList;
 
     DestinePurcaseAdapter mAdapter;
+    List<MapiTasteResult> tastes;
+    String options1Str;
+    OptionsPickerView positionOptions;
+    ArrayList<MapiTasteResult> posOptions1Items = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +103,9 @@ public class DestinePurcaseActivity extends BaseActivity {
 
         back.setImageResource(R.mipmap.back);
         center.setText("预订");
+        recyclerView.setFocusable(true);
+        recyclerView.setFocusableInTouchMode(true);
+
         timeList = new ArrayList<>();
         //时间选择器
         pvTime = new TimePickerView(this, TimePickerView.Type.YEAR_MONTH_DAY);
@@ -132,6 +146,9 @@ public class DestinePurcaseActivity extends BaseActivity {
         mAdapter = new DestinePurcaseAdapter(this, mList);
         recyclerView.setAdapter(mAdapter);
 
+        //选项选择器
+        positionOptions = new OptionsPickerView(this);
+
     }
 
     private void initListener() {
@@ -143,6 +160,15 @@ public class DestinePurcaseActivity extends BaseActivity {
                 timeTv.setText(mapiResourceResult.getUse_begin_time() + "-" + mapiResourceResult.getUse_end_time());
             }
         });
+
+        positionOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3) {
+                options1Str = posOptions1Items.get(options1).getPickerViewText();
+                tasteTv.setText(TextUtils.isEmpty(options1Str)?"":options1Str);
+            }
+        });
+
     }
 
     private void load() {
@@ -156,14 +182,17 @@ public class DestinePurcaseActivity extends BaseActivity {
                 List<MapiFoodResult> list = JSONArray.parseArray(success.getJSONObject("data").getJSONArray("set_meal").toJSONString(), MapiFoodResult.class);
                 String discount_rate = success.getJSONObject("data").getString("discount_rate");
                 List<MapiResourceResult> times = JSONArray.parseArray(success.getJSONObject("data").getJSONArray("use_time").toJSONString(), MapiResourceResult.class);
+                tastes = JSONArray.parseArray(success.getJSONObject("data").getJSONArray("taste").toJSONString(),MapiTasteResult.class);
                 dateList = JSONArray.parseArray(success.getJSONObject("data").getJSONArray("no_open_date").toJSONString(), MapiResourceResult.class);
                 if (TextUtils.isEmpty(discount_rate) || "10".equals(discount_rate)) {
+                    discountRateStr = "10";
                     discountRate.setVisibility(View.GONE);
-                    newPrice.setVisibility(View.GONE);
+                    oldPrice.setVisibility(View.GONE);
                 } else {
                     discountRateStr = discount_rate;
                     discountRate.setText(discountRateStr + "折");
                     discountRate.setVisibility(View.VISIBLE);
+                    oldPrice.setVisibility(View.VISIBLE);
                     newPrice.setVisibility(View.VISIBLE);
                 }
 
@@ -177,6 +206,21 @@ public class DestinePurcaseActivity extends BaseActivity {
                 if (null != times && !times.isEmpty()) {
                     timeList.addAll(times);
                     dinnerTiemDialog.setmList(timeList);
+                }
+
+                if(null!=tastes&&!tastes.isEmpty()){
+                    for(MapiTasteResult tasteResult : tastes){
+                        posOptions1Items.add(tasteResult);
+                    }
+                    //三级联动效果
+                    positionOptions.setPicker(posOptions1Items);
+                    //设置选择的三级单位
+//        pwOptions.setLabels("省", "市", "区");
+//        pvOptions.setTitle("选择城市");
+                    positionOptions.setCyclic(false);
+                    //设置默认选中的三级项目
+                    //监听确定选择按钮
+                    positionOptions.setSelectOptions(0);
                 }
 
             }
@@ -208,7 +252,7 @@ public class DestinePurcaseActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.back, R.id.date, R.id.time, R.id.order})
+    @OnClick({R.id.back, R.id.date, R.id.time, R.id.order,R.id.taste_ll})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back:
@@ -227,8 +271,17 @@ public class DestinePurcaseActivity extends BaseActivity {
                     MainToast.showShortToast("请选择用餐时间段");
                     return;
                 }
+                if(TextUtils.isEmpty(options1Str)){
+                    MainToast.showShortToast("请选择口味");
+                    return;
+                }
                 if(verifyDate())
                     order();
+                break;
+            case R.id.taste_ll:
+                if(null!=tastes&&!tastes.isEmpty()){
+                    positionOptions.show();
+                }
                 break;
         }
     }

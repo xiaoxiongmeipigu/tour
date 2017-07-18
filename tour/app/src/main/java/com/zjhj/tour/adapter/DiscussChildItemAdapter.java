@@ -63,9 +63,9 @@ public class DiscussChildItemAdapter  extends RecyclerView.Adapter<DiscussChildI
         MapiResourceResult itemResult = mList.get(position);
 
         //创建将要下载的图片的URI
-       Uri imageUri = Uri.parse(itemResult.getPic_url());
-        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(imageUri)
-                .setResizeOptions(new ResizeOptions(DPUtil.dip2px(54), DPUtil.dip2px(54)))
+         Uri imageUri = Uri.parse(itemResult.getPic_url());
+          ImageRequest request = ImageRequestBuilder.newBuilderWithSource(imageUri)
+                .setResizeOptions(new ResizeOptions(DPUtil.dip2px(60), DPUtil.dip2px(60)))
                 .build();
         DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setImageRequest(request)

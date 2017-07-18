@@ -142,6 +142,7 @@ public class SetPsdActivity extends BaseActivity {
                     @Override
                     public void success(JSONObject success) {
                         hideLoading();
+                        MainToast.showShortToast("密码重置成功");
                         ControllerUtil.go2Login();
                     }
                 }, new RequestExceptionCallback() {

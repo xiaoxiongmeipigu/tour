@@ -385,12 +385,15 @@ public class ItemApi extends BasicApi{
      * @param exceptionCallback
      */
     public static void ordersubmit(Activity activity,String set_meal_list,String use_date,String use_time_id,String mobile,
-                                   final RequestCallback callback,final RequestExceptionCallback exceptionCallback){
+                                   String taste,String remark,final RequestCallback callback,final RequestExceptionCallback exceptionCallback){
         Map<String,String> params = new HashMap<>();
         params.put("set_meal_list",set_meal_list);
         params.put("use_date",use_date);
         params.put("use_time_id",use_time_id);
         params.put("mobile",mobile);
+        params.put("taste",taste);
+        if(!TextUtils.isEmpty(remark))
+            params.put("remark",remark);
         MapiUtil.getInstance().call(activity,ordersubmit,params,new MapiUtil.MapiSuccessResponse(){
             @Override
             public void success(JSONObject json) {
@@ -533,13 +536,16 @@ public class ItemApi extends BasicApi{
      * @param exceptionCallback
      */
     public static void ordermodify(Activity activity,String order_id,String order_detail_list,String use_date,String use_time_id,String mobile,
-                                          final RequestCallback callback,final RequestExceptionCallback exceptionCallback){
+                                          String taste,String remark,final RequestCallback callback,final RequestExceptionCallback exceptionCallback){
         Map<String,String> params = new HashMap<>();
         params.put("order_id",order_id);
         params.put("order_detail_list",order_detail_list);
         params.put("use_date",use_date);
         params.put("use_time_id",use_time_id);
         params.put("mobile",mobile);
+        params.put("taste",taste);
+        if(!TextUtils.isEmpty(remark))
+            params.put("remark",remark);
         MapiUtil.getInstance().call(activity,ordermodify,params,new MapiUtil.MapiSuccessResponse(){
             @Override
             public void success(JSONObject json) {

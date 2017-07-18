@@ -54,10 +54,10 @@ public class JGJDataSource {
     public static List<MapiResourceResult> getSort() {
         List<MapiResourceResult> list = new ArrayList<>();
         list.add(new MapiResourceResult("1", "智能排序"));
-        list.add(new MapiResourceResult("1", "离我最近"));
-        list.add(new MapiResourceResult("2", "人气最高"));
-        list.add(new MapiResourceResult("3", "好评优先"));
-        list.add(new MapiResourceResult("4", "用餐最低标准"));
+        list.add(new MapiResourceResult("2", "离我最近"));
+        list.add(new MapiResourceResult("3", "人气最高"));
+        list.add(new MapiResourceResult("4", "好评优先"));
+        list.add(new MapiResourceResult("5", "用餐最低标准"));
         return list;
     }
 

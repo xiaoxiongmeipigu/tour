@@ -43,7 +43,7 @@
                 android:layout_marginRight="@dimen/margin_1"
                 android:textColorHint="@color/light_black"
                 android:background="@null"
-                android:hint="输入酒店名称"
+                android:hint="输入商家名称或景点名称"
                 android:singleLine="true"
                 android:maxLines="1"
                 android:inputType="text"

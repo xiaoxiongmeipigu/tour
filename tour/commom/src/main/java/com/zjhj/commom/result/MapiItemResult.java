@@ -36,6 +36,63 @@ public class MapiItemResult extends MapiBaseResult{
 
     private String merchant_id;
 
+    private String merchant_share_page;
+
+    private String type;
+    private String addtime;
+    private String child_guide_name;
+    private String money;
+
+    private String content;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
+
+    public String getAddtime() {
+        return addtime;
+    }
+
+    public void setAddtime(String addtime) {
+        this.addtime = addtime;
+    }
+
+    public String getChild_guide_name() {
+        return child_guide_name;
+    }
+
+    public void setChild_guide_name(String child_guide_name) {
+        this.child_guide_name = child_guide_name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getMerchant_share_page() {
+        return merchant_share_page;
+    }
+
+    public void setMerchant_share_page(String merchant_share_page) {
+        this.merchant_share_page = merchant_share_page;
+    }
+
     public String getMerchant_id() {
         return merchant_id;
     }

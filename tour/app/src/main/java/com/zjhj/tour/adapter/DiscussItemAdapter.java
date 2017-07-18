@@ -31,6 +31,7 @@ import com.zjhj.commom.util.DebugLog;
 import com.zjhj.tour.R;
 import com.zjhj.tour.interfaces.RecyOnItemClickListener;
 import com.zjhj.tour.util.ControllerUtil;
+import com.zjhj.tour.widget.DividerGridItemDecoration;
 import com.zjhj.tour.widget.DividerListItemDecoration;
 
 import java.util.ArrayList;
@@ -152,12 +153,10 @@ public class DiscussItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         final ArrayList<MapiResourceResult> picList = mapiDiscussResult.getPic();
         if (null != picList && !picList.isEmpty()) {
 
-            GridLayoutManager manager = new GridLayoutManager(mContext, 4);
+            GridLayoutManager manager = new GridLayoutManager(mContext,4);
             holder.recyclerView.setLayoutManager(manager);
             //如果可以确定每个item的高度是固定的，设置这个选项可以提高性能
             holder.recyclerView.setHasFixedSize(true);
-            holder.recyclerView.addItemDecoration(new DividerListItemDecoration(mContext, OrientationHelper.HORIZONTAL, DPUtil.dip2px(4), mContext.getResources().getColor(R.color.shop_white)));
-            holder.recyclerView.addItemDecoration(new DividerListItemDecoration(mContext, OrientationHelper.VERTICAL, DPUtil.dip2px(4), mContext.getResources().getColor(R.color.shop_white)));
             DiscussChildItemAdapter mAdapter = new DiscussChildItemAdapter(mContext, picList);
             holder.recyclerView.setAdapter(mAdapter);
             mAdapter.setOnItemClickListener(new RecyOnItemClickListener() {

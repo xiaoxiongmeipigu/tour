@@ -1,6 +1,7 @@
 package com.zjhj.commom.api;
 
 import android.app.Activity;
+import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -8,7 +9,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zjhj.commom.result.MapiCityResult;
 import com.zjhj.commom.result.MapiImageResult;
+import com.zjhj.commom.result.MapiRegionResult;
 import com.zjhj.commom.result.MapiUserResult;
+import com.zjhj.commom.sharedpreferences.UserSP;
 import com.zjhj.commom.util.DebugLog;
 import com.zjhj.commom.util.MapiUtil;
 import com.zjhj.commom.util.RequestCallback;
@@ -54,8 +57,10 @@ public class CommonApi extends BasicApi{
      * @param callback
      * @param exceptionCallback
      */
-    public static void city(Activity activity,final RequestCallback callback, final RequestExceptionCallback exceptionCallback){
+    public static void city(Activity activity,String keyword,final RequestCallback callback, final RequestExceptionCallback exceptionCallback){
         Map<String,String> params = new HashMap<>();
+        if(!TextUtils.isEmpty(keyword))
+            params.put("keyword",keyword);
         MapiUtil.getInstance().call(activity,city,params,new MapiUtil.MapiSuccessResponse(){
             @Override
             public void success(JSONObject json) {
@@ -90,6 +95,29 @@ public class CommonApi extends BasicApi{
                 callback.success(json);
             }
         },new MapiUtil.MapiFailResponse(){
+            @Override
+            public void fail(Integer code, String failMessage) {
+                exceptionCallback.error(code,failMessage);
+            }
+        });
+    }
+
+    /**
+     * 省市区数据
+     * @param activity
+     * @param callback
+     * @param exceptionCallback
+     */
+    public static void defaultregion(Activity activity,final RequestCallback callback, final RequestExceptionCallback exceptionCallback){
+        Map<String,String> params = new HashMap<>();
+        MapiUtil.getInstance().call(activity,defaultregion,params,new MapiUtil.MapiSuccessResponse(){
+            @Override
+            public void success(JSONObject json) {
+                DebugLog.i("json="+json);
+                callback.success(json);
+            }
+        },new MapiUtil.MapiFailResponse(){
+
             @Override
             public void fail(Integer code, String failMessage) {
                 exceptionCallback.error(code,failMessage);

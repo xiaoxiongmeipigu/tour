@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zjhj.commom.api.UserApi;
+import com.zjhj.commom.result.MapiUserResult;
 import com.zjhj.commom.util.RequestCallback;
 import com.zjhj.commom.util.RequestExceptionCallback;
 import com.zjhj.commom.widget.MainToast;
@@ -170,6 +171,11 @@ public class ModifyPsdActivity extends BaseActivity {
                     return;
                 }
 
+                if(oldPsd.equals(newPsd)||oldPsd.equals(newTwoPsd)){
+                    MainToast.showShortToast("新旧密码不能一致");
+                    return;
+                }
+
                 confirm(oldPsd,newPsd);
 
                 break;
@@ -178,10 +184,15 @@ public class ModifyPsdActivity extends BaseActivity {
 
     private void confirm(String old_password,String new_password){
         showLoading();
-        UserApi.modifypassword(this, old_password, new_password, new RequestCallback() {
+        UserApi.modifypassword(this, old_password, new_password, new RequestCallback<String>() {
             @Override
-            public void success(Object success) {
+            public void success(String success) {
                 hideLoading();
+                if(!TextUtils.isEmpty(success)){
+                    MapiUserResult userResult = userSP.getUserBean();
+                    userResult.setToken(success);
+                    userSP.saveUserBean(userResult);
+                }
                 MainToast.showShortToast("密码修改成功");
                 finish();
             }

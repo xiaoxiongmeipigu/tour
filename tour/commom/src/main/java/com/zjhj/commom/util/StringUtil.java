@@ -227,4 +227,23 @@ public class StringUtil {
         return emails;
     }
 
+    /**
+     * 检证座机号码
+     *
+     * @param str
+     * @return
+     */
+    public static boolean isTel(String str) {
+        if (str == null) {
+            return false;
+        }
+        str = str.trim();
+        if (str.length() < 1) {
+            return false;
+        }
+        Pattern pattern = Pattern.compile("/^\\d{3}-\\d{8}|\\d{4}-\\d{7}$/");
+        Matcher matcher = pattern.matcher(str);
+        return matcher.find();
+    }
+
 }

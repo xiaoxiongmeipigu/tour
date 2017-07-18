@@ -1,5 +1,7 @@
 package com.zjhj.commom.result;
 
+import com.bigkoo.pickerview.model.IPickerViewData;
+
 import java.io.Serializable;
 
 /**
@@ -26,6 +28,24 @@ public class MapiResourceResult extends MapiBaseResult {
     private String use_end_time;
 
     private String date;
+    private String guide_name;
+    private String merchant_count;
+
+    public String getGuide_name() {
+        return guide_name;
+    }
+
+    public void setGuide_name(String guide_name) {
+        this.guide_name = guide_name;
+    }
+
+    public String getMerchant_count() {
+        return merchant_count;
+    }
+
+    public void setMerchant_count(String merchant_count) {
+        this.merchant_count = merchant_count;
+    }
 
     public String getDate() {
         return date;
@@ -220,6 +240,5 @@ public class MapiResourceResult extends MapiBaseResult {
         }
         return true;
     }
-
 
 }

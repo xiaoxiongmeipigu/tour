@@ -100,6 +100,7 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/content_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -113,6 +114,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:visibility="gone"
             >
 
             <TextView
@@ -146,7 +148,6 @@
             android:text=""
             android:textColor="@color/shop_red"
             android:textSize="@dimen/text_normal"
-            android:layout_marginTop="@dimen/margin_1"
             android:layout_marginLeft="@dimen/margin_2"
             android:maxLines="2"
             android:ellipsize="end"

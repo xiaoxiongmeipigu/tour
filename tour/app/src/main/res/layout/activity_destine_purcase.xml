@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zjhj.tour.activity.destine.DestinePurcaseActivity">
+    tools:context="com.zjhj.tour.activity.destine.DestinePurcaseActivity"
+    android:background="@color/background_gray"
+    >
 
     <include
         layout="@layout/lay_header"
@@ -214,6 +216,90 @@
                     android:textSize="@dimen/text_big_x"
                     android:textColor="#aaaaaa"
                     android:layout_marginRight="@dimen/margin_2"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/taste_ll"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_height_45dp"
+                android:gravity="center_vertical"
+                android:background="@color/shop_white"
+                android:layout_marginTop="@dimen/margin_1"
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="口味"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/text_big_x"
+                    android:layout_marginLeft="@dimen/margin_2"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/margin_2"
+                    android:gravity="center_vertical"
+                    >
+
+                    <TextView
+                        android:id="@+id/taste_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="点击选择口味"
+                        android:textSize="@dimen/text_big"
+                        android:textColor="@color/light_black"
+                        />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/right"
+                        android:layout_marginLeft="@dimen/margin_1"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/shop_white"
+                android:paddingTop="@dimen/margin_2"
+                android:paddingBottom="@dimen/margin_2"
+                android:layout_marginTop="@dimen/margin_1"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="备注"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/text_big_x"
+                    android:layout_marginLeft="@dimen/margin_2"
+                    />
+
+                <EditText
+                    android:id="@+id/remark_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="90dp"
+                    android:hint="请输入备注内容"
+                    android:textColorHint="#aaaaaa"
+                    android:background="@drawable/rect_stroke_divider_width_1_round_5"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/text_big"
+                    android:layout_marginTop="@dimen/margin_2"
+                    android:layout_marginLeft="@dimen/margin_2"
+                    android:layout_marginRight="@dimen/margin_2"
+                    android:gravity="top|left"
+                    android:padding="@dimen/margin_10dp"
                     />
 
             </LinearLayout>

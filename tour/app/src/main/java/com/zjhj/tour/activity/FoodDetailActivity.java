@@ -24,6 +24,7 @@ import com.zjhj.commom.result.MapiResourceResult;
 import com.zjhj.commom.util.DPUtil;
 import com.zjhj.commom.util.RequestCallback;
 import com.zjhj.commom.util.RequestExceptionCallback;
+import com.zjhj.commom.util.ShareModule;
 import com.zjhj.commom.widget.MainToast;
 import com.zjhj.tour.R;
 import com.zjhj.tour.adapter.food.FoodDetailAdapter;
@@ -31,6 +32,7 @@ import com.zjhj.tour.adapter.shop.ShopDetailAdapter;
 import com.zjhj.tour.base.BaseActivity;
 import com.zjhj.tour.util.ControllerUtil;
 import com.zjhj.tour.widget.DividerListItemDecoration;
+import com.zjhj.tour.widget.ShareDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +62,9 @@ public class FoodDetailActivity extends BaseActivity {
     String id = "";
     String merchant_id = "";
     String merchant_name = "";
+
+    ShareDialog shareDialog;
+    MapiFoodResult mapiFoodResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,9 +101,38 @@ public class FoodDetailActivity extends BaseActivity {
         mAdapter.setId(id);
         recyclerView.setAdapter(mAdapter);
 
+        if (shareDialog == null)
+            shareDialog = new ShareDialog(this, R.style.image_dialog_theme);
+
     }
 
     private void initListener() {
+
+        shareDialog.setDialogItemClickListner(new ShareDialog.DialogItemClickListner() {
+            @Override
+            public void onItemClick(View view, int position) {
+                String SHARE_ORDER_DETAIL = mapiFoodResult.getMerchant_share_page();
+                String img_url = mapiFoodResult.getMerchant_cover_pic();
+                switch (position) {
+                    case 0://微信好友
+                        ShareModule shareModule1 = new ShareModule(FoodDetailActivity.this,mapiFoodResult.getMerchant_name(), mapiFoodResult.getFeature(),img_url, SHARE_ORDER_DETAIL);
+                        shareModule1.startShare(1);
+                        break;
+                    case 1:
+                        ShareModule shareModule2 = new ShareModule(FoodDetailActivity.this, mapiFoodResult.getMerchant_name(), mapiFoodResult.getFeature(), img_url,SHARE_ORDER_DETAIL);
+                        shareModule2.startShare(2);
+                        break;
+                    case 2:
+                        ShareModule shareModule3 = new ShareModule(FoodDetailActivity.this, mapiFoodResult.getMerchant_name(), mapiFoodResult.getFeature(),img_url, SHARE_ORDER_DETAIL);
+                        shareModule3.startShare(3);
+                        break;
+                    case 3:
+                        ShareModule shareModule4 = new ShareModule(FoodDetailActivity.this, mapiFoodResult.getMerchant_name(), mapiFoodResult.getFeature(), img_url, SHARE_ORDER_DETAIL);
+                        shareModule4.startShare(4);
+                        break;
+                }
+            }
+        });
 
     }
 
@@ -110,7 +144,7 @@ public class FoodDetailActivity extends BaseActivity {
             public void success(JSONObject success) {
                 hideLoading();
                 Gson gson = new Gson();
-                MapiFoodResult mapiFoodResult = gson.fromJson(success.getJSONObject("data").toJSONString(),MapiFoodResult.class); //MapiItemResult mapiItemResult = JSONObject.parseObject(success.getJSONObject("data").toJSONString(),MapiItemResult.class);
+                mapiFoodResult = gson.fromJson(success.getJSONObject("data").toJSONString(),MapiFoodResult.class); //MapiItemResult mapiItemResult = JSONObject.parseObject(success.getJSONObject("data").toJSONString(),MapiItemResult.class);
                 merchant_id = mapiFoodResult.getMerchant_id();
                 merchant_name = mapiFoodResult.getMerchant_name();
                 List<MapiFoodResult> set_meal = JSONArray.parseArray(success.getJSONObject("data").getJSONArray("dishes").toJSONString(),MapiFoodResult.class);
@@ -148,6 +182,10 @@ public class FoodDetailActivity extends BaseActivity {
                 }
                 break;
             case R.id.iv_right_two:
+                if(null!=mapiFoodResult)
+                    shareDialog.showDialog();
+                else
+                    MainToast.showShortToast("暂无信息");
                 break;
             case R.id.purcase:
                 if(!TextUtils.isEmpty(id)){

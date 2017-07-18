@@ -14,8 +14,10 @@ import com.zjhj.tour.base.BaseActivity;
 import com.zjhj.tour.fragment.discuss.AllDiscussFragment;
 import com.zjhj.tour.fragment.discuss.ImageDiscussFragment;
 import com.zjhj.tour.fragment.order.AllOrderFragment;
+import com.zjhj.tour.fragment.order.CancelOrderFragment;
 import com.zjhj.tour.fragment.order.DiscussCompleteOrderFragment;
 import com.zjhj.tour.fragment.order.DiscussOrderFragment;
+import com.zjhj.tour.fragment.order.RejectedOrderFragment;
 import com.zjhj.tour.fragment.order.UseOrderFragment;
 import com.zjhj.tour.fragment.order.WaitOrderFragment;
 
@@ -46,6 +48,9 @@ public class OrderListActivity extends BaseActivity {
     UseOrderFragment useOrderFragment;
     DiscussOrderFragment discussOrderFragment;
     DiscussCompleteOrderFragment discussCompleteOrderFragment;
+    CancelOrderFragment cancelOrderFragment;
+    RejectedOrderFragment rejectedOrderFragment;
+
     int fragIndex = 0;
 
     @Override
@@ -79,25 +84,33 @@ public class OrderListActivity extends BaseActivity {
         useOrderFragment = new UseOrderFragment();
         discussOrderFragment = new DiscussOrderFragment();
         discussCompleteOrderFragment = new DiscussCompleteOrderFragment();
+        cancelOrderFragment = new CancelOrderFragment();
+        rejectedOrderFragment = new RejectedOrderFragment();
 
 //        list.add(allOrderFragment);
         list.add(waitOrderFragment);
         list.add(useOrderFragment);
         list.add(discussOrderFragment);
         list.add(discussCompleteOrderFragment);
+        list.add(cancelOrderFragment);
+        list.add(rejectedOrderFragment);
 
 //        list_title.add("全部");
         list_title.add("待确认");
         list_title.add("待使用");
         list_title.add("待评价");
         list_title.add("已评价");
+        list_title.add("已取消");
+        list_title.add("已驳回");
 
-        tablayout.setTabMode(TabLayout.MODE_FIXED);
+        tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tablayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tablayout.addTab(tablayout.newTab().setText(list_title.get(0)));
         tablayout.addTab(tablayout.newTab().setText(list_title.get(1)));
         tablayout.addTab(tablayout.newTab().setText(list_title.get(2)));
         tablayout.addTab(tablayout.newTab().setText(list_title.get(3)));
+        tablayout.addTab(tablayout.newTab().setText(list_title.get(4)));
+        tablayout.addTab(tablayout.newTab().setText(list_title.get(5)));
         mAdapter = new TabFragmentAdapter(getSupportFragmentManager(), list, list_title);
         viewpager.setAdapter(mAdapter);
         tablayout.setupWithViewPager(viewpager);

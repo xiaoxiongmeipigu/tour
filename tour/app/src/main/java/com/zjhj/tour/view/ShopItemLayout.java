@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.zjhj.tour.R;
 import com.zjhj.tour.adapter.DiscussItemAdapter;
 import com.zjhj.tour.adapter.FoodItemAdapter;
 import com.zjhj.tour.adapter.HomeItemAdapter;
+import com.zjhj.tour.base.BaseActivity;
 import com.zjhj.tour.interfaces.RecyOnItemClickListener;
 import com.zjhj.tour.util.ControllerUtil;
 
@@ -46,10 +48,12 @@ public class ShopItemLayout extends RelativeLayout {
 
     FoodItemAdapter mAdapter;
 
+    BaseActivity activity;
 
     public ShopItemLayout(Context context) {
         super(context);
         mContext = context;
+        activity = (BaseActivity) context;
         initView();
         initListener();
     }
@@ -57,6 +61,7 @@ public class ShopItemLayout extends RelativeLayout {
     public ShopItemLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
+        activity = (BaseActivity) context;
         initView();
         initListener();
     }
@@ -64,6 +69,7 @@ public class ShopItemLayout extends RelativeLayout {
     public ShopItemLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
+        activity = (BaseActivity) context;
         initView();
         initListener();
     }
@@ -90,8 +96,13 @@ public class ShopItemLayout extends RelativeLayout {
         mAdapter.setOnItemClickListener(new RecyOnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                MapiFoodResult mapiFoodResult = (MapiFoodResult) mList.get(position).getData();
-                ControllerUtil.go2FoodDetail(mapiFoodResult.getId());
+                if(null!=activity.userSP.getUserBean()&&!TextUtils.isEmpty(activity.userSP.getUserBean().getToken())){
+                    MapiFoodResult mapiFoodResult = (MapiFoodResult) mList.get(position).getData();
+                    ControllerUtil.go2FoodDetail(mapiFoodResult.getId());
+                }else{
+                   ControllerUtil.go2Login();
+                }
+
             }
         });
     }

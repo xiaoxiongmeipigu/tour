@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.zjhj.commom.api.BasicApi;
 import com.zjhj.commom.api.UserApi;
 import com.zjhj.commom.result.MapiUserResult;
 import com.zjhj.commom.util.RequestCallback;
@@ -168,7 +169,7 @@ public class AccountLoginFrag extends BaseFrag {
                 });
                 break;
             case R.id.protocol:
-
+                ControllerUtil.go2WebView(BasicApi.PROTOCOL_GUIDE_URL,"用户协议","","","",false);
                 break;
             case R.id.forget:
                 ControllerUtil.go2ForgetPsd();

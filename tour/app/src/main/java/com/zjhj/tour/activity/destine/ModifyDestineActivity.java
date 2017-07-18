@@ -2,23 +2,25 @@ package com.zjhj.tour.activity.destine;
 
 import android.content.Intent;
 import android.graphics.Paint;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.zjhj.commom.api.ItemApi;
 import com.zjhj.commom.result.MapiFoodResult;
 import com.zjhj.commom.result.MapiResourceResult;
+import com.zjhj.commom.result.MapiTasteResult;
 import com.zjhj.commom.util.DPUtil;
 import com.zjhj.commom.util.DateUtil;
 import com.zjhj.commom.util.DebugLog;
@@ -28,10 +30,8 @@ import com.zjhj.commom.util.StringUtil;
 import com.zjhj.commom.widget.MainToast;
 import com.zjhj.tour.R;
 import com.zjhj.tour.adapter.destine.DestineModifyAdapter;
-import com.zjhj.tour.adapter.destine.DestinePurcaseAdapter;
 import com.zjhj.tour.base.BaseActivity;
 import com.zjhj.tour.interfaces.PurcaseSheetListener;
-import com.zjhj.tour.util.ControllerUtil;
 import com.zjhj.tour.widget.DinnerTiemDialog;
 import com.zjhj.tour.widget.DividerListItemDecoration;
 
@@ -63,6 +63,11 @@ public class ModifyDestineActivity extends BaseActivity {
     TextView timeTv;
     @Bind(R.id.mobile)
     TextView mobile;
+    @Bind(R.id.taste_tv)
+    TextView tasteTv;
+    @Bind(R.id.remark_et)
+    EditText remarkEt;
+
 
     TimePickerView pvTime;
     DinnerTiemDialog dinnerTiemDialog;
@@ -77,6 +82,12 @@ public class ModifyDestineActivity extends BaseActivity {
     List<MapiResourceResult> timeList;
 
     DestineModifyAdapter mAdapter;
+    List<MapiTasteResult> tastes;
+    String options1Str;
+    OptionsPickerView positionOptions;
+    ArrayList<MapiTasteResult> posOptions1Items = new ArrayList<>();
+
+    int tastePos = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +96,7 @@ public class ModifyDestineActivity extends BaseActivity {
         ButterKnife.bind(this);
         if (null != getIntent()) {
             id = getIntent().getStringExtra("id");
-            position = getIntent().getIntExtra("position",-1);
+            position = getIntent().getIntExtra("position", -1);
         }
         if (!TextUtils.isEmpty(id)) {
             initView();
@@ -100,6 +111,9 @@ public class ModifyDestineActivity extends BaseActivity {
 
         back.setImageResource(R.mipmap.back);
         center.setText("修改订单");
+        recyclerView.setFocusable(true);
+        recyclerView.setFocusableInTouchMode(true);
+
         timeList = new ArrayList<>();
         //时间选择器
         pvTime = new TimePickerView(this, TimePickerView.Type.YEAR_MONTH_DAY);
@@ -140,6 +154,9 @@ public class ModifyDestineActivity extends BaseActivity {
         mAdapter = new DestineModifyAdapter(this, mList);
         recyclerView.setAdapter(mAdapter);
 
+        //选项选择器
+        positionOptions = new OptionsPickerView(this);
+
     }
 
     private void initListener() {
@@ -154,9 +171,17 @@ public class ModifyDestineActivity extends BaseActivity {
 
         mAdapter.setOnPurcaseSheetListener(new PurcaseSheetListener() {
             @Override
-            public void notifyPurcaseSheet(View view,int position,int num, String price) {
-                mList.get(position).setNum(num+"");
+            public void notifyPurcaseSheet(View view, int position, int num, String price) {
+                mList.get(position).setNum(num + "");
                 notifyPrice();
+            }
+        });
+
+        positionOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3) {
+                options1Str = posOptions1Items.get(options1).getPickerViewText();
+                tasteTv.setText(TextUtils.isEmpty(options1Str)?"":options1Str);
             }
         });
 
@@ -165,7 +190,7 @@ public class ModifyDestineActivity extends BaseActivity {
     private void load() {
 
         showLoading();
-        ItemApi.ordermodifypreview(this,id, new RequestCallback<JSONObject>() {
+        ItemApi.ordermodifypreview(this, id, new RequestCallback<JSONObject>() {
             @Override
             public void success(JSONObject success) {
                 hideLoading();
@@ -173,17 +198,28 @@ public class ModifyDestineActivity extends BaseActivity {
                 List<MapiFoodResult> list = JSONArray.parseArray(success.getJSONObject("data").getJSONArray("list").toJSONString(), MapiFoodResult.class);
                 String discount_rate = success.getJSONObject("data").getString("discount_rate");
                 List<MapiResourceResult> times = JSONArray.parseArray(success.getJSONObject("data").getJSONArray("use_time").toJSONString(), MapiResourceResult.class);
+                tastes = JSONArray.parseArray(success.getJSONObject("data").getJSONArray("taste").toJSONString(),MapiTasteResult.class);
                 dateList = JSONArray.parseArray(success.getJSONObject("data").getJSONArray("no_open_date").toJSONString(), MapiResourceResult.class);
                 String dateStr = success.getJSONObject("data").getString("use_date");
                 String use_begin_time = success.getJSONObject("data").getString("use_begin_time");
                 String use_end_time = success.getJSONObject("data").getString("use_end_time");
                 String use_time_id = success.getJSONObject("data").getString("use_time_id");
+                String remark = success.getJSONObject("data").getString("remark");
+                String order_taste = success.getJSONObject("data").getString("order_taste");
+                remarkEt.setText(TextUtils.isEmpty(remark)?"":remark);
 
-                if(!TextUtils.isEmpty(use_begin_time)&&!TextUtils.isEmpty(use_end_time)) {
+                if(TextUtils.isEmpty(order_taste)){
+                    tasteTv.setText("点击选择口味");
+                }else{
+                    tasteTv.setText(order_taste);
+                    options1Str = order_taste;
+                }
+
+                if (!TextUtils.isEmpty(use_begin_time) && !TextUtils.isEmpty(use_end_time)) {
                     timeTv.setText(use_begin_time + "-" + use_end_time);
                     dinner_id = use_time_id;
                 }
-                if(!TextUtils.isEmpty(dateStr))
+                if (!TextUtils.isEmpty(dateStr))
                     dateTv.setText(dateStr);
                 if (TextUtils.isEmpty(discount_rate) || "10".equals(discount_rate)) {
                     discountRate.setVisibility(View.GONE);
@@ -207,6 +243,24 @@ public class ModifyDestineActivity extends BaseActivity {
                     dinnerTiemDialog.setmList(timeList);
                 }
 
+                if(null!=tastes&&!tastes.isEmpty()){
+                    for(int i=0;i<tastes.size();i++){
+                        MapiTasteResult tasteResult = tastes.get(i);
+                        if(order_taste.equals(tasteResult.getName()))
+                            tastePos =i;
+                        posOptions1Items.add(tasteResult);
+                    }
+                    //三级联动效果
+                    positionOptions.setPicker(posOptions1Items);
+                    //设置选择的三级单位
+//        pwOptions.setLabels("省", "市", "区");
+//        pvOptions.setTitle("选择城市");
+                    positionOptions.setCyclic(false);
+                    //设置默认选中的三级项目
+                    //监听确定选择按钮
+                    positionOptions.setSelectOptions(tastePos);
+                }
+
             }
         }, new RequestExceptionCallback() {
             @Override
@@ -223,9 +277,9 @@ public class ModifyDestineActivity extends BaseActivity {
         double allOldPrice = 0;
 
 
-        for(MapiFoodResult foodResult : mList){
+        for (MapiFoodResult foodResult : mList) {
             String price = TextUtils.isEmpty(foodResult.getOriginal_single_price()) ? "0" : foodResult.getOriginal_single_price();
-            String numStr = TextUtils.isEmpty(foodResult.getNum())?"0":foodResult.getNum();
+            String numStr = TextUtils.isEmpty(foodResult.getNum()) ? "0" : foodResult.getNum();
             double priceDouble = Double.parseDouble(price);
             allOldPrice += priceDouble * Integer.parseInt(numStr);
         }
@@ -236,7 +290,7 @@ public class ModifyDestineActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.back, R.id.date, R.id.time, R.id.order})
+    @OnClick({R.id.back, R.id.date, R.id.time, R.id.order,R.id.taste_ll})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back:
@@ -251,26 +305,35 @@ public class ModifyDestineActivity extends BaseActivity {
                 }
                 break;
             case R.id.order:
-                if(TextUtils.isEmpty(dinner_id)){
+                if (TextUtils.isEmpty(dinner_id)) {
                     MainToast.showShortToast("请选择用餐时间段");
                     return;
                 }
-                if(verifyDate())
+                if(TextUtils.isEmpty(options1Str)){
+                    MainToast.showShortToast("请选择口味");
+                    return;
+                }
+                if (verifyDate())
                     order();
+                break;
+            case R.id.taste_ll:
+                if(null!=tastes&&!tastes.isEmpty()){
+                    positionOptions.show();
+                }
                 break;
         }
     }
 
-    private void order(){
+    private void order() {
 
         showLoading();
-        ItemApi.ordermodify(this,id,getSelIds(), dateTv.getText().toString(), dinner_id, phoneStr, new RequestCallback() {
+        ItemApi.ordermodify(this, id, getSelIds(), dateTv.getText().toString(), dinner_id, phoneStr,options1Str,remarkEt.getText().toString(),new RequestCallback() {
             @Override
             public void success(Object success) {
                 hideLoading();
                 Intent intent = new Intent();
-                intent.putExtra("position",position);
-                setResult(RESULT_OK,intent);
+                intent.putExtra("position", position);
+                setResult(RESULT_OK, intent);
                 finish();
             }
         }, new RequestExceptionCallback() {
@@ -283,19 +346,19 @@ public class ModifyDestineActivity extends BaseActivity {
 
     }
 
-    private String getSelIds(){
+    private String getSelIds() {
         String rec_ids = "";
-        if(null!=mList){
+        if (null != mList) {
             rec_ids = JSON.toJSONString(mList);
         }
-        DebugLog.i("jsonString=>"+rec_ids);
+        DebugLog.i("jsonString=>" + rec_ids);
         return rec_ids;
     }
 
-    private boolean verifyDate(){
-        if(null!=dateList){
-            for(MapiResourceResult resourceResult : dateList){
-                if(resourceResult.getDate().equals(dateTv.getText().toString())) {
+    private boolean verifyDate() {
+        if (null != dateList) {
+            for (MapiResourceResult resourceResult : dateList) {
+                if (resourceResult.getDate().equals(dateTv.getText().toString())) {
                     MainToast.showShortToast("当天酒店预订已满，请更换日期或联系酒店");
                     return false;
                 }

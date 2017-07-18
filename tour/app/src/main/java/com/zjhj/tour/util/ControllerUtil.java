@@ -28,6 +28,13 @@ import com.zjhj.tour.activity.destine.DestinePurcaseActivity;
 import com.zjhj.tour.activity.destine.ModifyDestineActivity;
 import com.zjhj.tour.activity.discuss.DiscussActivity;
 import com.zjhj.tour.activity.discuss.DiscussListActivity;
+import com.zjhj.tour.activity.partner.PartnerActivity;
+import com.zjhj.tour.activity.partner.PartnerCloseActivity;
+import com.zjhj.tour.activity.partner.PartnerFriendActivity;
+import com.zjhj.tour.activity.partner.PartnerShopActivity;
+import com.zjhj.tour.activity.percentage.PercentageActivity;
+import com.zjhj.tour.activity.percentage.PercentageListActivity;
+import com.zjhj.tour.activity.percentage.PercentageSubmitActivity;
 import com.zjhj.tour.activity.person.CollectActivity;
 import com.zjhj.tour.activity.person.MessageActivity;
 import com.zjhj.tour.activity.person.MyDiscussActivity;
@@ -348,6 +355,70 @@ public class ControllerUtil {
         Intent intent = new Intent(AppContext.getInstance(), ModifyDestineActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("id",id);
+        AppContext.getInstance().startActivity(intent);
+    }
+
+    /**
+     * 我的提成
+     */
+    public static void go2Percentage(){
+        Intent intent = new Intent(AppContext.getInstance(), PercentageActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        AppContext.getInstance().startActivity(intent);
+    }
+
+    /**
+     * 我的提现
+     */
+    public static void go2PercentageSubmit(String money){
+        Intent intent = new Intent(AppContext.getInstance(), PercentageSubmitActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("money",money);
+        AppContext.getInstance().startActivity(intent);
+    }
+
+    /**
+     * 提成明细
+     */
+    public static void go2PercentageList(){
+        Intent intent = new Intent(AppContext.getInstance(), PercentageListActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        AppContext.getInstance().startActivity(intent);
+    }
+
+    /**
+     * 我的伙伴
+     */
+    public static void go2Partner(){
+        Intent intent = new Intent(AppContext.getInstance(), PartnerActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        AppContext.getInstance().startActivity(intent);
+    }
+
+    /**
+     * 我的密友
+     */
+    public static void go2PartnerClose(){
+        Intent intent = new Intent(AppContext.getInstance(), PartnerCloseActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        AppContext.getInstance().startActivity(intent);
+    }
+
+    /**
+     * 我的伙伴
+     */
+    public static void go2PartnerFriend(){
+        Intent intent = new Intent(AppContext.getInstance(), PartnerFriendActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        AppContext.getInstance().startActivity(intent);
+    }
+
+    /**
+     * 我的酒店
+     */
+    public static void go2PartnerShop(){
+        Intent intent = new Intent(AppContext.getInstance(), PartnerShopActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         AppContext.getInstance().startActivity(intent);
     }
 

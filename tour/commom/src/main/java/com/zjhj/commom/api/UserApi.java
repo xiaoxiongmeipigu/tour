@@ -161,12 +161,12 @@ public class UserApi extends BasicApi{
      * @param tour_guide_no
      * @param identity_pic
      * @param tour_guide_pic
-     * @param referrer_mobile
+     * @param user_code
      * @param callback
      * @param exceptionCallback
      */
     public static void register(Activity activity,String name,String mobile,String sms_code,String identity_no,String tour_guide_no,String identity_pic,
-                                String tour_guide_pic,String referrer_mobile,final RequestCallback callback, final RequestExceptionCallback exceptionCallback ){
+                                String tour_guide_pic,String user_code,String province_id,String city_id,String area_id,final RequestCallback callback, final RequestExceptionCallback exceptionCallback ){
         Map<String,String> params = new HashMap<>();
         params.put("name",name);
         params.put("mobile",mobile);
@@ -175,8 +175,14 @@ public class UserApi extends BasicApi{
         params.put("tour_guide_no",tour_guide_no);
         params.put("identity_pic",identity_pic);
         params.put("tour_guide_pic",tour_guide_pic);
-        if(!TextUtils.isEmpty(referrer_mobile))
-            params.put("referrer_mobile",referrer_mobile);
+        if(!TextUtils.isEmpty(user_code))
+            params.put("user_code",user_code);
+        if(!TextUtils.isEmpty(province_id))
+            params.put("province_id",province_id);
+        if(!TextUtils.isEmpty(city_id))
+            params.put("city_id",city_id);
+        if(!TextUtils.isEmpty(area_id))
+            params.put("area_id",area_id);
         MapiUtil.getInstance().call(activity,registerUrl,params,new MapiUtil.MapiSuccessResponse(){
             @Override
             public void success(JSONObject json) {
@@ -265,7 +271,8 @@ public class UserApi extends BasicApi{
             @Override
             public void success(JSONObject json) {
                 DebugLog.i("json="+json);
-                callback.success(json);
+                String token = json.getJSONObject("data").getString("token");
+                callback.success(token);
             }
         },new MapiUtil.MapiFailResponse(){
             @Override
@@ -399,5 +406,192 @@ public class UserApi extends BasicApi{
 
     }
 
+    /**
+     * 我的伙伴
+     * @param activity
+     * @param callback
+     * @param exceptionCallback
+     */
+    public static void userpartner(Activity activity,final RequestCallback callback, final RequestExceptionCallback exceptionCallback){
+        Map<String,String> params = new HashMap<>();
+        MapiUtil.getInstance().call(activity,userpartner,params,new MapiUtil.MapiSuccessResponse(){
+            @Override
+            public void success(JSONObject json) {
+                DebugLog.i("json="+json);
+                callback.success(json);
+            }
+        },new MapiUtil.MapiFailResponse(){
+            @Override
+            public void fail(Integer code, String failMessage) {
+                exceptionCallback.error(code,failMessage);
+            }
+        });
+    }
+
+    /**
+     * 我的伙伴
+     * @param activity
+     * @param callback
+     * @param exceptionCallback
+     */
+    public static void userclosefriend(Activity activity,String page,String limit,final RequestPageCallback callback, final RequestExceptionCallback exceptionCallback){
+        Map<String,String> params = new HashMap<>();
+        params.put("page",page);
+        params.put("limit",limit);
+        MapiUtil.getInstance().call(activity,userclosefriend,params,new MapiUtil.MapiSuccessResponse(){
+            @Override
+            public void success(JSONObject json) {
+                DebugLog.i("json="+json);
+                List<MapiResourceResult> result = JSONArray.parseArray(json.getJSONObject("data").getJSONArray("list").toJSONString(),MapiResourceResult.class);
+                Integer count = json.getJSONObject("data").getInteger("page_count");
+                if(null!=count){
+                    callback.success(count,result);
+                }
+            }
+        },new MapiUtil.MapiFailResponse(){
+            @Override
+            public void fail(Integer code, String failMessage) {
+                exceptionCallback.error(code,failMessage);
+            }
+        });
+    }
+
+    /**
+     * 我的朋友
+     * @param activity
+     * @param callback
+     * @param exceptionCallback
+     */
+    public static void userfriend(Activity activity,String page,String limit,final RequestPageCallback callback, final RequestExceptionCallback exceptionCallback){
+        Map<String,String> params = new HashMap<>();
+        params.put("page",page);
+        params.put("limit",limit);
+        MapiUtil.getInstance().call(activity,userfriend,params,new MapiUtil.MapiSuccessResponse(){
+            @Override
+            public void success(JSONObject json) {
+                DebugLog.i("json="+json);
+                List<MapiResourceResult> result = JSONArray.parseArray(json.getJSONObject("data").getJSONArray("list").toJSONString(),MapiResourceResult.class);
+                Integer count = json.getJSONObject("data").getInteger("page_count");
+                if(null!=count){
+                    callback.success(count,result);
+                }
+            }
+        },new MapiUtil.MapiFailResponse(){
+            @Override
+            public void fail(Integer code, String failMessage) {
+                exceptionCallback.error(code,failMessage);
+            }
+        });
+    }
+
+    /**
+     * 我的奖励金
+     * @param activity
+     * @param callback
+     * @param exceptionCallback
+     */
+    public static void usermoney(Activity activity,final RequestCallback callback, final RequestExceptionCallback exceptionCallback){
+        Map<String,String> params = new HashMap<>();
+        MapiUtil.getInstance().call(activity,usermoney,params,new MapiUtil.MapiSuccessResponse(){
+            @Override
+            public void success(JSONObject json) {
+                DebugLog.i("json="+json);
+                callback.success(json);
+            }
+        },new MapiUtil.MapiFailResponse(){
+            @Override
+            public void fail(Integer code, String failMessage) {
+                exceptionCallback.error(code,failMessage);
+            }
+        });
+    }
+
+    /**
+     * 我的推广酒店
+     * @param activity
+     * @param callback
+     * @param exceptionCallback
+     */
+    public static void usermymerchant(Activity activity,String page,String limit,final RequestPageCallback callback, final RequestExceptionCallback exceptionCallback){
+        Map<String,String> params = new HashMap<>();
+        params.put("page",page);
+        params.put("limit",limit);
+        MapiUtil.getInstance().call(activity,usermymerchant,params,new MapiUtil.MapiSuccessResponse(){
+            @Override
+            public void success(JSONObject json) {
+                DebugLog.i("json="+json);
+                List<MapiItemResult> result = JSONArray.parseArray(json.getJSONObject("data").getJSONArray("list").toJSONString(),MapiItemResult.class);
+                Integer count = json.getJSONObject("data").getInteger("page_count");
+                if(null!=count){
+                    callback.success(count,result);
+                }
+            }
+        },new MapiUtil.MapiFailResponse(){
+            @Override
+            public void fail(Integer code, String failMessage) {
+                exceptionCallback.error(code,failMessage);
+            }
+        });
+    }
+
+    /**
+     * 奖励金明细
+     * @param activity
+     * @param callback
+     * @param exceptionCallback
+     */
+    public static void usercash(Activity activity,String page,String limit,final RequestPageCallback callback, final RequestExceptionCallback exceptionCallback){
+        Map<String,String> params = new HashMap<>();
+        params.put("page",page);
+        params.put("limit",limit);
+        MapiUtil.getInstance().call(activity,usercash,params,new MapiUtil.MapiSuccessResponse(){
+            @Override
+            public void success(JSONObject json) {
+                DebugLog.i("json="+json);
+                List<MapiItemResult> result = JSONArray.parseArray(json.getJSONObject("data").getJSONArray("list").toJSONString(),MapiItemResult.class);
+                Integer count = json.getJSONObject("data").getInteger("page_count");
+                if(null!=count){
+                    callback.success(count,result);
+                }
+            }
+        },new MapiUtil.MapiFailResponse(){
+            @Override
+            public void fail(Integer code, String failMessage) {
+                exceptionCallback.error(code,failMessage);
+            }
+        });
+    }
+
+    /**
+     * 提现申请
+     * @param activity
+     * @param money
+     * @param realname
+     * @param bank_code
+     * @param bank_type
+     * @param callback
+     * @param exceptionCallback
+     */
+    public static void userapply(Activity activity,String money,String realname,String bank_code,String bank_type,final RequestCallback callback,
+                                 final RequestExceptionCallback exceptionCallback){
+        Map<String,String> params = new HashMap<>();
+        params.put("money",money);
+        params.put("realname",realname);
+        params.put("bank_code",bank_code);
+        params.put("bank_type",bank_type);
+
+        MapiUtil.getInstance().call(activity,userapply,params,new MapiUtil.MapiSuccessResponse(){
+            @Override
+            public void success(JSONObject json) {
+                DebugLog.i("json="+json);
+                callback.success(json);
+            }
+        },new MapiUtil.MapiFailResponse(){
+            @Override
+            public void fail(Integer code, String failMessage) {
+                exceptionCallback.error(code,failMessage);
+            }
+        });
+    }
 
 }

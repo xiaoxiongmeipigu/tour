@@ -25,6 +25,33 @@ public class MapiFoodResult extends MapiBaseResult{
     private String set_meal_num;
     private String order_detail_id;
     private String content;
+    private String merchant_share_page;
+    private String feature;
+    private String merchant_cover_pic;
+
+    public String getMerchant_cover_pic() {
+        return merchant_cover_pic;
+    }
+
+    public void setMerchant_cover_pic(String merchant_cover_pic) {
+        this.merchant_cover_pic = merchant_cover_pic;
+    }
+
+    public String getFeature() {
+        return feature;
+    }
+
+    public void setFeature(String feature) {
+        this.feature = feature;
+    }
+
+    public String getMerchant_share_page() {
+        return merchant_share_page;
+    }
+
+    public void setMerchant_share_page(String merchant_share_page) {
+        this.merchant_share_page = merchant_share_page;
+    }
 
     public String getContent() {
         return content;

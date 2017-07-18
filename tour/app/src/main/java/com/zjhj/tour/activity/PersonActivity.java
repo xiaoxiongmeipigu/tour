@@ -10,15 +10,18 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.zjhj.commom.api.BasicApi;
 import com.zjhj.commom.api.UserApi;
 import com.zjhj.commom.util.RequestCallback;
 import com.zjhj.commom.util.RequestExceptionCallback;
+import com.zjhj.commom.util.ShareModule;
 import com.zjhj.commom.util.StringUtil;
 import com.zjhj.commom.widget.MainToast;
 import com.zjhj.tour.R;
 import com.zjhj.tour.base.BaseActivity;
 import com.zjhj.tour.util.ControllerUtil;
 import com.zjhj.tour.widget.MainAlertDialog;
+import com.zjhj.tour.widget.ShareDialog;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -46,6 +49,8 @@ public class PersonActivity extends BaseActivity {
     TextView useCount;
     @Bind(R.id.discuss_count)
     TextView discussCount;
+    @Bind(R.id.iv_right_two)
+    ImageView ivRightTwo;
 
     String phoneStr = "";
 
@@ -54,6 +59,8 @@ public class PersonActivity extends BaseActivity {
 
     MainAlertDialog callDialog;
     MainAlertDialog exitDialog;
+    ShareDialog shareDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +76,8 @@ public class PersonActivity extends BaseActivity {
         back.setImageResource(R.mipmap.back_white);
         center.setText("个人中心");
         ivRight.setImageResource(R.mipmap.message);
+        ivRightTwo.setImageResource(R.mipmap.share);
+        ivRightTwo.setVisibility(View.VISIBLE);
 
         image.setImageURI(Uri.parse("res:///" + R.drawable.head_person_default));
 
@@ -90,6 +99,8 @@ public class PersonActivity extends BaseActivity {
         exitDialog = new MainAlertDialog(this);
         exitDialog.setLeftBtnText("退出").setRightBtnText("取消").setTitle("确认退出？");
 
+        if (shareDialog == null)
+            shareDialog = new ShareDialog(this, R.style.image_dialog_theme);
 
     }
 
@@ -142,6 +153,32 @@ public class PersonActivity extends BaseActivity {
             }
         });
 
+        shareDialog.setDialogItemClickListner(new ShareDialog.DialogItemClickListner() {
+            @Override
+            public void onItemClick(View view, int position) {
+                String SHARE_ORDER_DETAIL = BasicApi.SHARE_APP_URL;
+                String img_url = BasicApi.SHARE_APP_LOGO_URL;
+                switch (position) {
+                    case 0://微信好友
+                        ShareModule shareModule1 = new ShareModule(PersonActivity.this,"游助网","推广码："+(TextUtils.isEmpty(userSP.getUserBean().getUser_code()) ? "888888" : userSP.getUserBean().getUser_code()) , img_url, SHARE_ORDER_DETAIL);
+                        shareModule1.startShare(1);
+                        break;
+                    case 1:
+                        ShareModule shareModule2 = new ShareModule(PersonActivity.this, "游助网","推广码："+(TextUtils.isEmpty(userSP.getUserBean().getUser_code()) ? "888888" : userSP.getUserBean().getUser_code()) , img_url, SHARE_ORDER_DETAIL);
+                        shareModule2.startShare(2);
+                        break;
+                    case 2:
+                        ShareModule shareModule3 = new ShareModule(PersonActivity.this, "游助网", "推广码："+(TextUtils.isEmpty(userSP.getUserBean().getUser_code()) ? "888888" : userSP.getUserBean().getUser_code()), img_url, SHARE_ORDER_DETAIL);
+                        shareModule3.startShare(3);
+                        break;
+                    case 3:
+                        ShareModule shareModule4 = new ShareModule(PersonActivity.this, "游助网", "推广码："+(TextUtils.isEmpty(userSP.getUserBean().getUser_code()) ? "888888" : userSP.getUserBean().getUser_code()), img_url, SHARE_ORDER_DETAIL);
+                        shareModule4.startShare(4);
+                        break;
+                }
+            }
+        });
+
     }
 
     private void load() {
@@ -157,34 +194,33 @@ public class PersonActivity extends BaseActivity {
                 about_us = success.getJSONObject("data").getString("about_us");
                 service_tel = success.getJSONObject("data").getString("service_tel");
 
-                if(TextUtils.isEmpty(order_count_0)||"0".equals(order_count_0)){
+                if (TextUtils.isEmpty(order_count_0) || "0".equals(order_count_0)) {
                     waitCount.setText("");
                     waitCount.setVisibility(View.INVISIBLE);
-                }else {
+                } else {
                     waitCount.setText(order_count_0);
                     waitCount.setVisibility(View.VISIBLE);
                 }
 
-                if(TextUtils.isEmpty(order_count_1)||"0".equals(order_count_1)){
+                if (TextUtils.isEmpty(order_count_1) || "0".equals(order_count_1)) {
                     useCount.setText("");
                     useCount.setVisibility(View.INVISIBLE);
-                }else {
+                } else {
                     useCount.setText(order_count_1);
                     useCount.setVisibility(View.VISIBLE);
                 }
 
-                if(TextUtils.isEmpty(order_count_2)||"0".equals(order_count_2)){
+                if (TextUtils.isEmpty(order_count_2) || "0".equals(order_count_2)) {
                     discussCount.setText("");
                     discussCount.setVisibility(View.INVISIBLE);
-                }else {
+                } else {
                     discussCount.setText(order_count_2);
                     discussCount.setVisibility(View.VISIBLE);
                 }
 
-                if(!TextUtils.isEmpty(service_tel)){
+                if (!TextUtils.isEmpty(service_tel)) {
                     callDialog.setLeftBtnText("取消").setRightBtnText("呼叫").setTitle(service_tel);
                 }
-
 
 
             }
@@ -198,7 +234,7 @@ public class PersonActivity extends BaseActivity {
     }
 
     @OnClick({R.id.back, R.id.iv_right, R.id.edit_tv, R.id.discuss, R.id.collect, R.id.order_rl, R.id.service_ll, R.id.exit
-            , R.id.modify_psd, R.id.wait_ll, R.id.use_ll, R.id.discuss_ll,R.id.about_rl})
+            , R.id.modify_psd, R.id.wait_ll, R.id.use_ll, R.id.discuss_ll, R.id.about_rl, R.id.percentage_ll, R.id.friends_ll,R.id.iv_right_two})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back:
@@ -220,13 +256,13 @@ public class PersonActivity extends BaseActivity {
                 ControllerUtil.go2OrderList();
                 break;
             case R.id.service_ll:
-                if(!TextUtils.isEmpty(service_tel)){
+                if (!TextUtils.isEmpty(service_tel)) {
                     callDialog.show();
                 }
                 break;
             case R.id.about_rl:
-                if(!TextUtils.isEmpty(about_us)){
-                    ControllerUtil.go2WebView(about_us,"关于我们","","","",false);
+                if (!TextUtils.isEmpty(about_us)) {
+                    ControllerUtil.go2WebView(about_us, "关于我们", "", "", "", false);
                 }
                 break;
             case R.id.exit:
@@ -250,12 +286,21 @@ public class PersonActivity extends BaseActivity {
                 intent3.putExtra("fragIndex", 2);
                 startActivity(intent3);
                 break;
+            case R.id.percentage_ll:
+                ControllerUtil.go2Percentage();
+                break;
+            case R.id.friends_ll:
+                ControllerUtil.go2Partner();
+                break;
+            case R.id.iv_right_two:
+                shareDialog.showDialog();
+                break;
         }
     }
 
     @Override
     protected void onDestroy() {
-        if(null!=callDialog&&callDialog.isShowing()){
+        if (null != callDialog && callDialog.isShowing()) {
             callDialog.dismiss();
             callDialog = null;
         }
@@ -264,6 +309,12 @@ public class PersonActivity extends BaseActivity {
             exitDialog.dismiss();
             exitDialog = null;
         }
+
+        if (null != shareDialog && shareDialog.isShowing()) {
+            shareDialog.dismiss();
+            shareDialog = null;
+        }
+
         super.onDestroy();
     }
 }

@@ -259,16 +259,18 @@ public class HomeSliderLayout extends RelativeLayout {
 
                 @Override
                 public void onFinish() {
+                    if(null!=imgs&&!imgs.isEmpty()){
+                        //这里是设置当前页的下一页
+                        indexViewpager.setCurrentItem(indexViewpager.getCurrentItem()+1,true);
+                        indexViewpager.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(isSliderPlay)
+                                    slideImage();
+                            }
+                        }, 500);
+                    }
 
-                    //这里是设置当前页的下一页
-                    indexViewpager.setCurrentItem(indexViewpager.getCurrentItem()+1,true);
-                    indexViewpager.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            if(isSliderPlay)
-                                slideImage();
-                        }
-                    }, 500);
 
                 }
             }.start();
@@ -342,13 +344,18 @@ public class HomeSliderLayout extends RelativeLayout {
         if(!hasWindowFocus) {
             DebugLog.i("onWindowFocusChanged=>"+hasWindowFocus);
             DebugLog.i("CountDownTimerUtil==cancel");
-            isSliderPlay = false;
-            countDownTimerUtil.cancel();
-            countDownTimerUtil = null;
+            if(null!=imgs&&!imgs.isEmpty()){
+                isSliderPlay = false;
+                countDownTimerUtil.cancel();
+                countDownTimerUtil = null;
+            }
+
         }else{
             isSliderPlay = true;
             if(null==countDownTimerUtil){
-                slideImage();
+                if(null!=imgs&&!imgs.isEmpty()){
+                    slideImage();
+                }
             }
 
         }
