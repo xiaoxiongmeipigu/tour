@@ -100,7 +100,7 @@ public class OrderItemRejectAdapter extends RecyclerView.Adapter<OrderItemReject
             holder.recyclerView.setAdapter(mAdapter);
         }
 
-        holder.rejectTv.setText("驳回理由："+(TextUtils.isEmpty(itemResult.getContent())?"":itemResult.getContent()));
+        holder.rejectTv.setText("拒绝理由："+(TextUtils.isEmpty(itemResult.getContent())?"":itemResult.getContent()));
         holder.nameTv.setText(TextUtils.isEmpty(itemResult.getMerchant_name()) ? "" : itemResult.getMerchant_name());
         String dateStr = TextUtils.isEmpty(itemResult.getUse_date()) ? "" : itemResult.getUse_date();
         String use_begin_time = TextUtils.isEmpty(itemResult.getUse_begin_time()) ? "" : itemResult.getUse_begin_time();

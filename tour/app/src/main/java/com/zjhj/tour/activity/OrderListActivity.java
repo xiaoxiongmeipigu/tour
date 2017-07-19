@@ -101,7 +101,7 @@ public class OrderListActivity extends BaseActivity {
         list_title.add("待评价");
         list_title.add("已评价");
         list_title.add("已取消");
-        list_title.add("已驳回");
+        list_title.add("已拒绝");
 
         tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tablayout.setTabGravity(TabLayout.GRAVITY_FILL);

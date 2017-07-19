@@ -39,7 +39,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="已驳回"
+            android:text="已拒绝"
             android:textColor="@color/shop_blue"
             android:textSize="@dimen/text_big"
             />
