@@ -8,8 +8,8 @@ android {
         applicationId "com.zjhj.tour"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 9
-        versionName "1.9"
+        versionCode 12
+        versionName "2.2"
     }
     buildTypes {
         release {

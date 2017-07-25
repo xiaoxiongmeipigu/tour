@@ -120,11 +120,13 @@ public class ShopImageActivity extends BaseActivity {
         }
 
         if (null != typeTwo && !typeTwo.isEmpty()) {
+            mList.add(new IndexData(0, "DIVIDER", new MapiResourceResult()));
             mList.add(new IndexData(0, "TYPETWO", typeTwo));
             mList.add(new IndexData(0, "DIVIDER", new MapiResourceResult()));
         }
 
         if (null != typeThree && !typeThree.isEmpty()) {
+            mList.add(new IndexData(0, "DIVIDER", new MapiResourceResult()));
             mList.add(new IndexData(0, "DIVIDER", new MapiResourceResult()));
             mList.add(new IndexData(0, "TYPETHREE", typeThree));
         }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +17,10 @@ import com.zjhj.tour.R;
 import com.zjhj.tour.adapter.FoodItemAdapter;
 import com.zjhj.tour.adapter.food.FoodDetailItemAdapter;
 import com.zjhj.tour.interfaces.RecyOnItemClickListener;
+import com.zjhj.tour.util.ControllerUtil;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import butterknife.Bind;
@@ -82,9 +85,38 @@ public class FoodItemLayout extends RelativeLayout {
         mAdapter.setOnItemClickListener(new RecyOnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                ArrayList<MapiResourceResult> imgs = new ArrayList<>();
+                IndexData indexData = mList.get(position);
+                if("ITEM".equals(indexData.getType())){
+                    MapiFoodResult foodResult = (MapiFoodResult) indexData.getData();
+                    if(!TextUtils.isEmpty(foodResult.getPic_url())){
+                        MapiResourceResult resourceResult = new MapiResourceResult();
+                        resourceResult.setPic_url(foodResult.getPic_url());
+                        imgs.add(resourceResult);
+                        if(null!=imgs&&!imgs.isEmpty()){
+                            ControllerUtil.go2ShowBig(imgs,0);
+                        }
+                    }
+                }
             }
         });
+    }
+
+    private ArrayList<MapiResourceResult> getImgs(){
+        ArrayList<MapiResourceResult> imgs = new ArrayList<>();
+        if(null!=list){
+
+            for(MapiFoodResult foodResult : list){
+
+                if(!TextUtils.isEmpty(foodResult.getPic_url())){
+                    MapiResourceResult resourceResult = new MapiResourceResult();
+                    resourceResult.setPic_url(foodResult.getPic_url());
+                    imgs.add(resourceResult);
+                }
+            }
+
+        }
+        return imgs;
     }
 
     public void load(List<MapiFoodResult> data) {

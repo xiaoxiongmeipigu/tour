@@ -160,19 +160,19 @@ public class PersonActivity extends BaseActivity {
                 String img_url = BasicApi.SHARE_APP_LOGO_URL;
                 switch (position) {
                     case 0://微信好友
-                        ShareModule shareModule1 = new ShareModule(PersonActivity.this,"游助网","推广码："+(TextUtils.isEmpty(userSP.getUserBean().getUser_code()) ? "888888" : userSP.getUserBean().getUser_code()) , img_url, SHARE_ORDER_DETAIL);
+                        ShareModule shareModule1 = new ShareModule(PersonActivity.this,"游助网","邀请码："+(TextUtils.isEmpty(userSP.getUserBean().getUser_code()) ? "888888" : userSP.getUserBean().getUser_code()) , img_url, SHARE_ORDER_DETAIL);
                         shareModule1.startShare(1);
                         break;
                     case 1:
-                        ShareModule shareModule2 = new ShareModule(PersonActivity.this, "游助网","推广码："+(TextUtils.isEmpty(userSP.getUserBean().getUser_code()) ? "888888" : userSP.getUserBean().getUser_code()) , img_url, SHARE_ORDER_DETAIL);
+                        ShareModule shareModule2 = new ShareModule(PersonActivity.this, "游助网","邀请码："+(TextUtils.isEmpty(userSP.getUserBean().getUser_code()) ? "888888" : userSP.getUserBean().getUser_code()) , img_url, SHARE_ORDER_DETAIL);
                         shareModule2.startShare(2);
                         break;
                     case 2:
-                        ShareModule shareModule3 = new ShareModule(PersonActivity.this, "游助网", "推广码："+(TextUtils.isEmpty(userSP.getUserBean().getUser_code()) ? "888888" : userSP.getUserBean().getUser_code()), img_url, SHARE_ORDER_DETAIL);
+                        ShareModule shareModule3 = new ShareModule(PersonActivity.this, "游助网", "邀请码："+(TextUtils.isEmpty(userSP.getUserBean().getUser_code()) ? "888888" : userSP.getUserBean().getUser_code()), img_url, SHARE_ORDER_DETAIL);
                         shareModule3.startShare(3);
                         break;
                     case 3:
-                        ShareModule shareModule4 = new ShareModule(PersonActivity.this, "游助网", "推广码："+(TextUtils.isEmpty(userSP.getUserBean().getUser_code()) ? "888888" : userSP.getUserBean().getUser_code()), img_url, SHARE_ORDER_DETAIL);
+                        ShareModule shareModule4 = new ShareModule(PersonActivity.this, "游助网", "邀请码："+(TextUtils.isEmpty(userSP.getUserBean().getUser_code()) ? "888888" : userSP.getUserBean().getUser_code()), img_url, SHARE_ORDER_DETAIL);
                         shareModule4.startShare(4);
                         break;
                 }

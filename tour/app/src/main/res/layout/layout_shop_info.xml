@@ -20,7 +20,7 @@
             fresco:progressBarAutoRotateInterval="2000"
             fresco:progressBarImage="@drawable/progress"
             fresco:progressBarImageScaleType="centerInside"
-            fresco:actualImageScaleType="centerCrop"
+            fresco:actualImageScaleType="fitXY"
             android:layout_gravity="center"
             />
 
